@@ -7,17 +7,20 @@
 //
 
 #import "BETabBar.h"
-
+#import "BETabBarController.h"
 
 @interface BETabBar ()
 
 @property (nonatomic, strong) UIStackView *stackView;
 @property (nonatomic, strong) NSLayoutConstraint *stackViewHeightConstraint;
 
-@property (nonatomic, strong) BEBarBackground *barBackground;
 @property (nonatomic, weak) BETabBarButton *selectedItem;
+@property (nonatomic, strong) BEBarBackground *barBackground;
+@property (nonatomic, strong) NSArray<BETabBarButton *> *tabBarButtons;
 
 @end
+
+
 
 @implementation BETabBar
 
@@ -29,6 +32,11 @@
         self.selectionTintColor = UIColor.darkGrayColor;
         [self setupBarBackground];
         [self setupStackView];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(orientationChanged:)
+                                                     name:UIDeviceOrientationDidChangeNotification
+                                                   object:nil];
     }
     
     return self;
@@ -59,47 +67,62 @@
                                                   [self.stackView.topAnchor constraintEqualToAnchor:self.topAnchor],
                                                   self.stackViewHeightConstraint]];
     }
-    
 }
 
-- (void)setItems:(NSArray<BETabBarButton *> *)items {
-    
+- (void)setItems:(NSArray<BETabBarItem *> *)items {
+
     for (UIView *arrangedSubview in self.items) {
         [self.stackView removeArrangedSubview:arrangedSubview];
     }
     
     _items = items;
-    for (int i = 0; i < self.items.count; i++) {
-        BETabBarButton *currentItem = self.items[i];
-        currentItem.delegate = self;
-        currentItem.tintColor = self.tintColor;
-        currentItem.selectionTintColor = self.selectionTintColor;
-        [self.stackView addArrangedSubview:currentItem];
-        NSMutableArray<NSLayoutConstraint *> *constraints = [NSMutableArray arrayWithObject:[currentItem.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor]];
-        if (i > 0) {
-            UIView *previousItem = self.items[i-1];
-            [constraints addObject:[currentItem.widthAnchor constraintEqualToAnchor:previousItem.widthAnchor]];
-        }
-        currentItem.translatesAutoresizingMaskIntoConstraints = NO;
-        [NSLayoutConstraint activateConstraints:constraints];
-    }
-    
-}
-
-- (void)tabBarButtonWasSelected:(BETabBarButton *)barButton {
-    
-    if (![self.selectedItem isEqual:barButton]) {
+    for (int index = 0; index < self.items.count; index++) {
         
-        [self.delegate tabBar:self requestReloadingViewForSelectedItem:barButton];
-        [self.selectedItem deselect];
-        [barButton select];
-        self.selectedItem = barButton;
+        BETabBarButton *current = [[BETabBarButton alloc] initFromTabBarItem:self.items[index]];
+        current.tintColor = self.tintColor;
+        current.selectionTintColor = self.selectionTintColor;
+        
+        [current addTarget:self
+                    action:@selector(didSelectItem:)
+          forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.stackView addArrangedSubview:current];
+        current.translatesAutoresizingMaskIntoConstraints = NO;
+        [[current.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor] setActive:YES];
+        if (index == 0) {
+            [self didSelectItem:current];
+        } else {
+            BETabBarButton *previous = (BETabBarButton *)self.stackView.arrangedSubviews[index - 1];
+            [[current.widthAnchor constraintEqualToAnchor:previous.widthAnchor] setActive:YES];
+        }
     }
 }
-- (void)layoutSubviews {
 
-    self.stackViewHeightConstraint.constant = UIDeviceOrientationIsPortrait(UIDevice.currentDevice.orientation) ? BETabBarHeightVertical : BETabBarHeightHorizontal;
-    [super layoutSubviews];
+
+- (void)didSelectItem:(id)sender {
+    
+    BETabBarButton* item = (BETabBarButton *)sender;
+    [item setSelected:YES];
+    
+    if (![self.selectedItem isEqual:item]) {
+        NSArray<BETabBarButton *> *tabBarButtons = (NSArray<BETabBarButton *> *)self.stackView.arrangedSubviews;
+        [self.delegate tabBar:self didSelectItem:[self.items objectAtIndex:[tabBarButtons indexOfObject:item]]];
+        [self.selectedItem setSelected:NO];
+        self.selectedItem = item;
+    }
+}
+
+- (void)orientationChanged:(NSNotification *)notification {
+    
+    UIDeviceOrientation orientation = UIDevice.currentDevice.orientation;
+    if (UIDeviceOrientationIsValidInterfaceOrientation(orientation)) {
+        self.stackViewHeightConstraint.constant = UIDeviceOrientationIsPortrait(orientation) ? BETabBarHeightVertical : BETabBarHeightHorizontal;
+
+        for(BETabBarButton *button in (NSArray<BETabBarButton *> *)self.stackView.arrangedSubviews) {
+            [button orientationChanged:orientation];
+        }
+    }
+    
 }
 
 @end

@@ -9,7 +9,7 @@
 #import "BETabBarController.h"
 #import "BETabBarButton.h"
 #import "BELayoutContainerView.h"
-#import "BEConstants.h"
+#import "BETabBarControllerConstants.h"
 
 @interface BETabBarController ()
 
@@ -42,19 +42,7 @@
     [self setupLayoutContainerView];
     [self setupTabBar];
     
-    [self.tabBar setItems:@[[[BETabBarButton alloc] initWithImage:[UIImage imageNamed:@"window"]
-                                                            title:@"window"],
-                            [[BETabBarButton alloc] initWithImage:[UIImage imageNamed:@"paper_piece"]
-                                                            title:@"paper_piece"]]];
-    
-    UIViewController *controllerOne = [UIViewController new];
-    controllerOne.view.backgroundColor = UIColor.greenColor;
-    
-    UIViewController *controllerTwo = [UIViewController new];
-    controllerTwo.view.backgroundColor = UIColor.brownColor;
-    
-    self.viewControllers = @[controllerOne, controllerTwo];
-    
+
 }
 
 - (void)setupLayoutContainerView {
@@ -101,6 +89,8 @@
     CGFloat tabBarHeight = self.view.bounds.size.width > self.view.bounds.size.height ? BETabBarHeightHorizontal : BETabBarHeightVertical;
     self.tabBarHeightConstraint.constant = self.view.safeAreaInsets.bottom + tabBarHeight;
     
+    
+    
     [self updateSelectedViewControllerSafeAreaInsets];
 }
 
@@ -108,14 +98,15 @@
     self.selectedViewController.additionalSafeAreaInsets = UIEdgeInsetsMake(0, 0, self.tabBarHeightConstraint.constant, 0);
 }
 
-- (void)tabBar:(BETabBar *)tabBar requestReloadingViewForSelectedItem:(BETabBarButton *)item {
+- (void)tabBar:(BETabBar *)tabBar didSelectItem:(BETabBarItem *)item {
     
     [self.selectedViewController willMoveToParentViewController:nil];
     [self.selectedViewController.view removeFromSuperview];
     [self.selectedViewController removeFromParentViewController];
     
     NSUInteger index = [self.tabBar.items indexOfObject:item];
-    UIViewController *controller = self.viewControllers[index];
+    UIViewController *controller = self.tabBar.items[index].associatedController;
+    
     [self addChildViewController:controller];
     [self.layoutContainerView addSubview:controller.view];
     [controller didMoveToParentViewController:self];
@@ -126,8 +117,19 @@
                                               [controller.view.bottomAnchor constraintEqualToAnchor:self.layoutContainerView.bottomAnchor],
                                               [controller.view.leftAnchor constraintEqualToAnchor:self.layoutContainerView.leftAnchor],
                                               [controller.view.rightAnchor constraintEqualToAnchor:self.layoutContainerView.rightAnchor]]];
+}
+
+- (void)setItems:(NSArray<BETabBarItem *> *)items {
+    self.tabBar.items = items;
+    self.selectedIndex = 0;
     
-    
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    if (selectedIndex < self.tabBar.items.count) {
+        _selectedIndex = selectedIndex;
+        
+    }
 }
 
 - (__kindof UIView *)newExtendableView {

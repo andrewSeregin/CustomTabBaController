@@ -7,10 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-@class BETabBar, BETabBarButton;
+
+
+@class BETabBar, BETabBarItem;
+
 
 @protocol BETabBarDelegate <NSObject>
 
-- (void)tabBar:(BETabBar *)tabBar requestReloadingViewForSelectedItem:(BETabBarButton *)item;
+- (void)tabBar:(BETabBar *)tabBar didSelectItem:(BETabBarItem *)item;
 
 @end

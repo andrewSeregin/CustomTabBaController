@@ -7,22 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BETabBarButtonDelegate.h"
+#import "BETabBarItem.h"
 
 
-@interface BETabBarButton : UIView
+@interface BETabBarButton : UIControl
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) UIImage *image;
 
 @property (nonatomic, strong) UIColor *selectionTintColor;
 
-@property (nonatomic, weak) id<BETabBarButtonDelegate> delegate;
+- (instancetype)initFromTabBarItem:(BETabBarItem *)item;
 
-- (instancetype)init;
-- (instancetype)initWithImage:(UIImage *)image title:(NSString *)title;
-
-- (void)select;
-- (void)deselect;
+- (void)orientationChanged:(UIDeviceOrientation)orientation;
 
 @end

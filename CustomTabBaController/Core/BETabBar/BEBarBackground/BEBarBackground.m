@@ -8,6 +8,7 @@
 
 #import "BEBarBackground.h"
 
+
 @implementation BEBarBackground
 
 - (instancetype)init {

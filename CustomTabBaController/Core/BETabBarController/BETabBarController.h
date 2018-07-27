@@ -22,5 +22,6 @@
 @property (nonatomic, assign) __kindof UIViewController *selectedViewController;
 
 - (__kindof UIView *)newExtendableView;
+- (void)setItems:(NSArray<BETabBarItem *> *)items;
 
 @end

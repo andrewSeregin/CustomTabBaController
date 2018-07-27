@@ -7,18 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BEConstants.h"
 #import "BETabBarButton.h"
 #import "BEBarBackground.h"
-#import "BETabBarButtonDelegate.h"
 #import "BETabBarDelegate.h"
+#import "BETabBarControllerConstants.h"
 
-@interface BETabBar : UIView<BETabBarButtonDelegate>
+
+@interface BETabBar : UIView
 
 @property (nonatomic, strong) UIColor *selectionTintColor;
-@property (nonatomic, strong) NSArray<BETabBarButton *> *items;
-@property (nonatomic, weak) id<BETabBarDelegate> delegate;
+@property (nonatomic, strong) NSArray<BETabBarItem *> *items;
 
-- (void)setItems:(NSArray<BETabBarButton *> *)items;
+@property (nonatomic, weak) id<BETabBarDelegate> delegate;
 
 @end

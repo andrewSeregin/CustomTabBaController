@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface BEBarBackground : UIView
 
-//TODO: Make it UIImageView and set image;
 @property (nonatomic, strong) UIView *separatorView;
 @property (nonatomic, strong) UIVisualEffectView *effectView;
 

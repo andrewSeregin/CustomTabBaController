@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BETabBarController.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,27 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    BETabBarController *rootViewController = [BETabBarController new];
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+    
+    BETabBarItem *itemOne = [[BETabBarItem alloc] initWithTitle:@"window"
+                                                          image: [UIImage imageNamed:@"window"]
+                                                            tag:1055];
+    itemOne.associatedController = [UIViewController new];
+    itemOne.associatedController.view.backgroundColor = UIColor.greenColor;
+
+    BETabBarItem *itemTwo = [[BETabBarItem alloc] initWithTitle:@"paper_piece"
+                                                          image: [UIImage imageNamed:@"paper_piece"]
+                                                            tag:1056];
+    itemTwo.associatedController = [UIViewController new];
+    itemTwo.associatedController.view.backgroundColor = UIColor.brownColor;
+    [rootViewController setItems:@[itemOne,
+                                   itemTwo]];
+    
+
     return YES;
 }
 
