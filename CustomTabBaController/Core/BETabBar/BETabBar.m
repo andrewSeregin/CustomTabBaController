@@ -14,12 +14,11 @@
 @property (nonatomic, strong) UIStackView *stackView;
 @property (nonatomic, strong) NSLayoutConstraint *stackViewHeightConstraint;
 
-@property (nonatomic, weak) BETabBarButton *selectedItem;
+@property (nonatomic, weak) BETabBarButton *selectedButton;
 @property (nonatomic, strong) BEBarBackground *barBackground;
 @property (nonatomic, strong) NSArray<BETabBarButton *> *tabBarButtons;
 
 @end
-
 
 
 @implementation BETabBar
@@ -83,14 +82,14 @@
         current.selectionTintColor = self.selectionTintColor;
         
         [current addTarget:self
-                    action:@selector(didSelectItem:)
+                    action:@selector(didSelectButton:)
           forControlEvents:UIControlEventTouchUpInside];
         
         [self.stackView addArrangedSubview:current];
         current.translatesAutoresizingMaskIntoConstraints = NO;
         [[current.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor] setActive:YES];
         if (index == 0) {
-            [self didSelectItem:current];
+            [self didSelectButton:current];
         } else {
             BETabBarButton *previous = (BETabBarButton *)self.stackView.arrangedSubviews[index - 1];
             [[current.widthAnchor constraintEqualToAnchor:previous.widthAnchor] setActive:YES];
@@ -98,17 +97,23 @@
     }
 }
 
+- (void)setSelectedItem:(BETabBarItem *)selectedItem {
+    _selectedItem = selectedItem;
+    BETabBarButton *barButton = (BETabBarButton *)self.stackView.arrangedSubviews[[self.items indexOfObject:selectedItem]];
+    [self didSelectButton:barButton];
+}
 
-- (void)didSelectItem:(id)sender {
+
+- (void)didSelectButton:(id)sender {
     
     BETabBarButton* item = (BETabBarButton *)sender;
     [item setSelected:YES];
     
-    if (![self.selectedItem isEqual:item]) {
+    if (![self.selectedButton isEqual:item]) {
         NSArray<BETabBarButton *> *tabBarButtons = (NSArray<BETabBarButton *> *)self.stackView.arrangedSubviews;
         [self.delegate tabBar:self didSelectItem:[self.items objectAtIndex:[tabBarButtons indexOfObject:item]]];
-        [self.selectedItem setSelected:NO];
-        self.selectedItem = item;
+        [self.selectedButton setSelected:NO];
+        self.selectedButton = item;
     }
 }
 

@@ -17,6 +17,7 @@
 
 @property (nonatomic, strong) UIColor *selectionTintColor;
 @property (nonatomic, strong) NSArray<BETabBarItem *> *items;
+@property (nonatomic, weak) BETabBarItem *selectedItem;
 
 @property (nonatomic, weak) id<BETabBarDelegate> delegate;
 

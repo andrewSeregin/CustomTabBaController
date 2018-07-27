@@ -128,7 +128,7 @@
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     if (selectedIndex < self.tabBar.items.count) {
         _selectedIndex = selectedIndex;
-        
+        self.tabBar.selectedItem = self.tabBar.items[selectedIndex];
     }
 }
 
