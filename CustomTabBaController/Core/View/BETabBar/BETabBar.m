@@ -7,7 +7,8 @@
 //
 
 #import "BETabBar.h"
-#import "BETabBarController.h"
+
+#import "BEExtendedTabBarController.h"
 
 @interface BETabBar ()
 
@@ -88,9 +89,7 @@
         [self.stackView addArrangedSubview:current];
         current.translatesAutoresizingMaskIntoConstraints = NO;
         [[current.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor] setActive:YES];
-        if (index == 0) {
-            [self didSelectButton:current];
-        } else {
+        if (index > 0) {
             BETabBarButton *previous = (BETabBarButton *)self.stackView.arrangedSubviews[index - 1];
             [[current.widthAnchor constraintEqualToAnchor:previous.widthAnchor] setActive:YES];
         }
@@ -127,6 +126,18 @@
             [button orientationChanged:orientation];
         }
     }
+    
+}
+
+- (UIView *)snapshotTabBarWithSeparator:(BOOL)withSeparator {
+    
+    UIView *snapshot = [self snapshotViewAfterScreenUpdates:YES];
+    UIView *separator = withSeparator ? [self.barBackground.separatorView snapshotViewAfterScreenUpdates:YES] : nil;
+    if (snapshot && separator) {
+        [snapshot addSubview:separator];
+    }
+    
+    return snapshot;
     
 }
 

@@ -7,7 +7,8 @@
 //
 
 #import "BETabBarButton.h"
-#import "BETabBarControllerConstants.h"
+
+#import "BEExtendedTabBarControlleConstants.h"
 
 
 @interface BETabBarButton ()

@@ -9,15 +9,23 @@
 /* Begin PBXBuildFile section */
 		B14DC144210B4B8100AF9595 /* BETabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B14DC143210B4B8100AF9595 /* BETabBarButton.m */; };
 		B14DC14C210B4ECD00AF9595 /* BETabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B14DC14B210B4ECD00AF9595 /* BETabBarItem.m */; };
+		B15EAF3F2110526D000C066D /* BEExtensibleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF3D2110526C000C066D /* BEExtensibleViewController.m */; };
+		B15EAF4221105292000C066D /* BEBounceResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF4021105292000C066D /* BEBounceResolver.m */; };
+		B15EAF49211052CF000C066D /* UIView+ScrollViewDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */; };
+		B15EAF4D21105378000C066D /* BEExtensionPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF4B21105378000C066D /* BEExtensionPresentationController.m */; };
+		B15EAF5221105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5121105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m */; };
+		B15EAF57211060BD000C066D /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF55211060BD000C066D /* PlayerView.m */; };
+		B15EAF5C21106123000C066D /* TrackDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5B21106123000C066D /* TrackDetailsViewController.m */; };
+		B15EAF6021106206000C066D /* PlayerTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */; };
 		B192EA0D210748F800355080 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA0C210748F800355080 /* AppDelegate.m */; };
 		B192EA13210748F900355080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B192EA11210748F900355080 /* Main.storyboard */; };
 		B192EA152107490800355080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B192EA142107490800355080 /* Assets.xcassets */; };
 		B192EA182107490800355080 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B192EA162107490800355080 /* LaunchScreen.storyboard */; };
 		B192EA1B2107490800355080 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA1A2107490800355080 /* main.m */; };
-		B192EA2421074A0F00355080 /* BETabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA2321074A0F00355080 /* BETabBarController.m */; };
+		B192EA2421074A0F00355080 /* BEExtendedTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA2321074A0F00355080 /* BEExtendedTabBarController.m */; };
 		B192EA2721074E8700355080 /* BETabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA2621074E8700355080 /* BETabBar.m */; };
 		B192EA3321075B9400355080 /* BEBarBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA3221075B9400355080 /* BEBarBackground.m */; };
-		B192EA3E21085F4F00355080 /* BETabBarControllerConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA3D21085F4F00355080 /* BETabBarControllerConstants.m */; };
+		B192EA3E21085F4F00355080 /* BEExtendedTabBarControlleConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA3D21085F4F00355080 /* BEExtendedTabBarControlleConstants.m */; };
 		B192EA4321086DB400355080 /* BELayoutContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA4221086DB400355080 /* BELayoutContainerView.m */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +35,24 @@
 		B14DC143210B4B8100AF9595 /* BETabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BETabBarButton.m; sourceTree = "<group>"; };
 		B14DC14A210B4ECD00AF9595 /* BETabBarItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BETabBarItem.h; sourceTree = "<group>"; };
 		B14DC14B210B4ECD00AF9595 /* BETabBarItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BETabBarItem.m; sourceTree = "<group>"; };
+		B15EAF3C2110526C000C066D /* BEExtensibleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensibleViewController.h; sourceTree = "<group>"; };
+		B15EAF3D2110526C000C066D /* BEExtensibleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEExtensibleViewController.m; sourceTree = "<group>"; };
+		B15EAF3E2110526D000C066D /* BEExtensibleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensibleViewControllerDelegate.h; sourceTree = "<group>"; };
+		B15EAF4021105292000C066D /* BEBounceResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEBounceResolver.m; sourceTree = "<group>"; };
+		B15EAF4121105292000C066D /* BEBounceResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEBounceResolver.h; sourceTree = "<group>"; };
+		B15EAF45211052CF000C066D /* UIView+ScrollViewDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ScrollViewDetection.h"; sourceTree = "<group>"; };
+		B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScrollViewDetection.m"; sourceTree = "<group>"; };
+		B15EAF4B21105378000C066D /* BEExtensionPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEExtensionPresentationController.m; sourceTree = "<group>"; };
+		B15EAF4C21105378000C066D /* BEExtensionPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensionPresentationController.h; sourceTree = "<group>"; };
+		B15EAF4F21105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensionPercentDrivenInteractiveTransitionDelegate.h; sourceTree = "<group>"; };
+		B15EAF5021105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensionPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
+		B15EAF5121105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEExtensionPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
+		B15EAF55211060BD000C066D /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
+		B15EAF56211060BD000C066D /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
+		B15EAF5A21106123000C066D /* TrackDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackDetailsViewController.h; sourceTree = "<group>"; };
+		B15EAF5B21106123000C066D /* TrackDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackDetailsViewController.m; sourceTree = "<group>"; };
+		B15EAF5E21106205000C066D /* PlayerTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTabBarViewController.h; sourceTree = "<group>"; };
+		B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarViewController.m; sourceTree = "<group>"; };
 		B192EA08210748F800355080 /* CustomTabBaController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTabBaController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B192EA0B210748F800355080 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B192EA0C210748F800355080 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -35,14 +61,14 @@
 		B192EA172107490800355080 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B192EA192107490800355080 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B192EA1A2107490800355080 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B192EA2221074A0F00355080 /* BETabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BETabBarController.h; sourceTree = "<group>"; };
-		B192EA2321074A0F00355080 /* BETabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BETabBarController.m; sourceTree = "<group>"; };
+		B192EA2221074A0F00355080 /* BEExtendedTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEExtendedTabBarController.h; sourceTree = "<group>"; };
+		B192EA2321074A0F00355080 /* BEExtendedTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEExtendedTabBarController.m; sourceTree = "<group>"; };
 		B192EA2521074E8700355080 /* BETabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BETabBar.h; sourceTree = "<group>"; };
 		B192EA2621074E8700355080 /* BETabBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BETabBar.m; sourceTree = "<group>"; };
 		B192EA3121075B9400355080 /* BEBarBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEBarBackground.h; sourceTree = "<group>"; };
 		B192EA3221075B9400355080 /* BEBarBackground.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEBarBackground.m; sourceTree = "<group>"; };
-		B192EA3C21085F4F00355080 /* BETabBarControllerConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BETabBarControllerConstants.h; sourceTree = "<group>"; };
-		B192EA3D21085F4F00355080 /* BETabBarControllerConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BETabBarControllerConstants.m; sourceTree = "<group>"; };
+		B192EA3C21085F4F00355080 /* BEExtendedTabBarControlleConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BEExtendedTabBarControlleConstants.h; sourceTree = "<group>"; };
+		B192EA3D21085F4F00355080 /* BEExtendedTabBarControlleConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BEExtendedTabBarControlleConstants.m; sourceTree = "<group>"; };
 		B192EA4121086DB400355080 /* BELayoutContainerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BELayoutContainerView.h; sourceTree = "<group>"; };
 		B192EA4221086DB400355080 /* BELayoutContainerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BELayoutContainerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,6 +102,127 @@
 			path = BETabBarItem;
 			sourceTree = "<group>";
 		};
+		B15EAF1E21104890000C066D /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF4E21105A53000C066D /* BEExtensionPercentDrivenInteractiveTransition */,
+				B15EAF4A2110535C000C066D /* BEExtensionPresentationController */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		B15EAF2A21104B0B000C066D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF4121105292000C066D /* BEBounceResolver.h */,
+				B15EAF4021105292000C066D /* BEBounceResolver.m */,
+				B15EAF43211052AE000C066D /* Categories */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		B15EAF3521104CC2000C066D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF3B21105245000C066D /* BEExtensibleViewController */,
+				B192EA3F2108642000355080 /* BEExtendedTabBarController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B15EAF3621104D2B000C066D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B192EA2821074E9100355080 /* BETabBar */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B15EAF3B21105245000C066D /* BEExtensibleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF3C2110526C000C066D /* BEExtensibleViewController.h */,
+				B15EAF3D2110526C000C066D /* BEExtensibleViewController.m */,
+				B15EAF3E2110526D000C066D /* BEExtensibleViewControllerDelegate.h */,
+			);
+			path = BEExtensibleViewController;
+			sourceTree = "<group>";
+		};
+		B15EAF43211052AE000C066D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF45211052CF000C066D /* UIView+ScrollViewDetection.h */,
+				B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		B15EAF4A2110535C000C066D /* BEExtensionPresentationController */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF4C21105378000C066D /* BEExtensionPresentationController.h */,
+				B15EAF4B21105378000C066D /* BEExtensionPresentationController.m */,
+			);
+			path = BEExtensionPresentationController;
+			sourceTree = "<group>";
+		};
+		B15EAF4E21105A53000C066D /* BEExtensionPercentDrivenInteractiveTransition */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF5021105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.h */,
+				B15EAF5121105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m */,
+				B15EAF4F21105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransitionDelegate.h */,
+			);
+			path = BEExtensionPercentDrivenInteractiveTransition;
+			sourceTree = "<group>";
+		};
+		B15EAF5321106084000C066D /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				B192EA0B210748F800355080 /* AppDelegate.h */,
+				B192EA0C210748F800355080 /* AppDelegate.m */,
+				B15EAF5821106102000C066D /* Controller */,
+				B15EAF542110608C000C066D /* View */,
+			);
+			path = Demo;
+			sourceTree = "<group>";
+		};
+		B15EAF542110608C000C066D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF56211060BD000C066D /* PlayerView.h */,
+				B15EAF55211060BD000C066D /* PlayerView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B15EAF5821106102000C066D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF5D211061D2000C066D /* PlayerTabBarViewController */,
+				B15EAF592110610A000C066D /* TrackDetailsViewController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B15EAF592110610A000C066D /* TrackDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF5A21106123000C066D /* TrackDetailsViewController.h */,
+				B15EAF5B21106123000C066D /* TrackDetailsViewController.m */,
+			);
+			path = TrackDetailsViewController;
+			sourceTree = "<group>";
+		};
+		B15EAF5D211061D2000C066D /* PlayerTabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF5E21106205000C066D /* PlayerTabBarViewController.h */,
+				B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */,
+			);
+			path = PlayerTabBarViewController;
+			sourceTree = "<group>";
+		};
 		B192E9FF210748F800355080 = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +242,8 @@
 		B192EA0A210748F800355080 /* CustomTabBaController */ = {
 			isa = PBXGroup;
 			children = (
+				B15EAF5321106084000C066D /* Demo */,
 				B192EA212107497C00355080 /* Core */,
-				B192EA0B210748F800355080 /* AppDelegate.h */,
-				B192EA0C210748F800355080 /* AppDelegate.m */,
 				B192EA11210748F900355080 /* Main.storyboard */,
 				B192EA142107490800355080 /* Assets.xcassets */,
 				B192EA162107490800355080 /* LaunchScreen.storyboard */,
@@ -110,10 +256,12 @@
 		B192EA212107497C00355080 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B192EA3C21085F4F00355080 /* BETabBarControllerConstants.h */,
-				B192EA3D21085F4F00355080 /* BETabBarControllerConstants.m */,
-				B192EA2821074E9100355080 /* BETabBar */,
-				B192EA3F2108642000355080 /* BETabBarController */,
+				B15EAF1E21104890000C066D /* Animator */,
+				B192EA3C21085F4F00355080 /* BEExtendedTabBarControlleConstants.h */,
+				B192EA3D21085F4F00355080 /* BEExtendedTabBarControlleConstants.m */,
+				B15EAF3521104CC2000C066D /* Controller */,
+				B15EAF2A21104B0B000C066D /* Utilities */,
+				B15EAF3621104D2B000C066D /* View */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -140,14 +288,14 @@
 			path = BEBarBackground;
 			sourceTree = "<group>";
 		};
-		B192EA3F2108642000355080 /* BETabBarController */ = {
+		B192EA3F2108642000355080 /* BEExtendedTabBarController */ = {
 			isa = PBXGroup;
 			children = (
 				B192EA4021086D3900355080 /* BELayoutContainerView */,
-				B192EA2221074A0F00355080 /* BETabBarController.h */,
-				B192EA2321074A0F00355080 /* BETabBarController.m */,
+				B192EA2221074A0F00355080 /* BEExtendedTabBarController.h */,
+				B192EA2321074A0F00355080 /* BEExtendedTabBarController.m */,
 			);
-			path = BETabBarController;
+			path = BEExtendedTabBarController;
 			sourceTree = "<group>";
 		};
 		B192EA4021086D3900355080 /* BELayoutContainerView */ = {
@@ -229,15 +377,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B15EAF49211052CF000C066D /* UIView+ScrollViewDetection.m in Sources */,
+				B15EAF5221105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m in Sources */,
+				B15EAF3F2110526D000C066D /* BEExtensibleViewController.m in Sources */,
+				B15EAF4D21105378000C066D /* BEExtensionPresentationController.m in Sources */,
 				B14DC14C210B4ECD00AF9595 /* BETabBarItem.m in Sources */,
 				B192EA3321075B9400355080 /* BEBarBackground.m in Sources */,
+				B15EAF5C21106123000C066D /* TrackDetailsViewController.m in Sources */,
 				B192EA1B2107490800355080 /* main.m in Sources */,
+				B15EAF6021106206000C066D /* PlayerTabBarViewController.m in Sources */,
 				B14DC144210B4B8100AF9595 /* BETabBarButton.m in Sources */,
-				B192EA3E21085F4F00355080 /* BETabBarControllerConstants.m in Sources */,
+				B192EA3E21085F4F00355080 /* BEExtendedTabBarControlleConstants.m in Sources */,
 				B192EA2721074E8700355080 /* BETabBar.m in Sources */,
-				B192EA2421074A0F00355080 /* BETabBarController.m in Sources */,
+				B192EA2421074A0F00355080 /* BEExtendedTabBarController.m in Sources */,
+				B15EAF4221105292000C066D /* BEBounceResolver.m in Sources */,
 				B192EA4321086DB400355080 /* BELayoutContainerView.m in Sources */,
 				B192EA0D210748F800355080 /* AppDelegate.m in Sources */,
+				B15EAF57211060BD000C066D /* PlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,14 +534,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 639C7F35GX;
 				INFOPLIST_FILE = CustomTabBaController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = andrew.s.seregin.gmail.com.CustomTabBaController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -394,14 +552,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 639C7F35GX;
 				INFOPLIST_FILE = CustomTabBaController/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = andrew.s.seregin.gmail.com.CustomTabBaController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

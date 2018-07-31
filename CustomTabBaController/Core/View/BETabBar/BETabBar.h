@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BETabBarButton.h"
+
+#import "BEExtendedTabBarControlleConstants.h"
+
 #import "BEBarBackground.h"
+#import "BETabBarButton.h"
 #import "BETabBarDelegate.h"
-#import "BETabBarControllerConstants.h"
 
 
 @interface BETabBar : UIView
@@ -20,5 +22,8 @@
 @property (nonatomic, weak) BETabBarItem *selectedItem;
 
 @property (nonatomic, weak) id<BETabBarDelegate> delegate;
+
+- (UIView *)snapshotTabBarWithSeparator:(BOOL)withSeparator;
+
 
 @end

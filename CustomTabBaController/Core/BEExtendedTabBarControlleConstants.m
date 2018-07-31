@@ -6,7 +6,7 @@
 //  Copyright © 2018 Andrew Seregin. All rights reserved.
 //
 
-#import "BETabBarControllerConstants.h"
+#import "BEExtendedTabBarControlleConstants.h"
 
 
 float const BETabBarHeightVertical = 49;

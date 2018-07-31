@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BETabBarController.h"
+#import "PlayerTabBarViewController.h"
 
 @interface AppDelegate ()
 
@@ -19,7 +19,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    BETabBarController *rootViewController = [BETabBarController new];
+    BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
     

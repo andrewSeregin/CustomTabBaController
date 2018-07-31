@@ -6,19 +6,21 @@
 //  Copyright © 2018 Andrew Seregin. All rights reserved.
 //
 
-#import "BETabBarController.h"
-#import "BETabBarButton.h"
-#import "BELayoutContainerView.h"
-#import "BETabBarControllerConstants.h"
+#import "BEExtendedTabBarController.h"
 
-@interface BETabBarController ()
+#import "BEExtendedTabBarControlleConstants.h"
+#import "BELayoutContainerView.h"
+#import "BETabBarButton.h"
+
+
+@interface BEExtendedTabBarController  ()
 
 @property (nonatomic, strong) NSLayoutConstraint *tabBarHeightConstraint;
 @property (nonatomic, strong) BELayoutContainerView *layoutContainerView;
 
 @end
 
-@implementation BETabBarController
+@implementation BEExtendedTabBarController 
 
 @synthesize tabBar = _tabBar;
 @synthesize extendableView = _extendableView;
@@ -41,8 +43,14 @@
     [super viewDidLoad];
     [self setupLayoutContainerView];
     [self setupTabBar];
+    [self prepareExtendableView];
     
-
+    [self.extendableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                      action:@selector(handleTapRecogniser)]];
+    self.interactiveAnimator = [[BEExtensionPercentDrivenInteractiveTransition alloc] initWithSourceView: self.extendableView];
+    self.interactiveAnimator.delegate = self;
+    
+    
 }
 
 - (void)setupLayoutContainerView {
@@ -83,13 +91,28 @@
                                               [self.extendableView.heightAnchor constraintEqualToConstant:71]]];
 }
 
+- (BEExtensibleViewController *)extensibleViewController {
+    
+    return  [BEExtensibleViewController new];
+}
+
+-(BEExtensibleViewController *)preparedExtensibleViewController {
+    
+    BEExtensibleViewController *controller = [self extensibleViewController];
+    controller.transitioningDelegate = self;
+    controller.modalPresentationStyle = UIModalPresentationCustom;
+    controller.modalPresentationCapturesStatusBarAppearance = YES;
+    controller.delegate = self;
+    
+    return controller;
+}
+
+
 - (void)viewSafeAreaInsetsDidChange {
     
     [super viewSafeAreaInsetsDidChange];
     CGFloat tabBarHeight = self.view.bounds.size.width > self.view.bounds.size.height ? BETabBarHeightHorizontal : BETabBarHeightVertical;
     self.tabBarHeightConstraint.constant = self.view.safeAreaInsets.bottom + tabBarHeight;
-    
-    
     
     [self updateSelectedViewControllerSafeAreaInsets];
 }
@@ -135,6 +158,65 @@
 - (__kindof UIView *)newExtendableView {
     
     return nil;
+}
+
+- (void)handleTapRecogniser {
+    
+    [self extend];
+}
+
+- (void)percentDrivenInteractiveAnimatorWillStartTransition:(BEExtensionPercentDrivenInteractiveTransition *)animator {
+    
+    [self extend];
+}
+
+- (void)extend {
+    
+    [self presentViewController:[self preparedExtensibleViewController]
+                       animated:YES
+                     completion:nil];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+                                                                  presentingController:(UIViewController *)presenting
+                                                                      sourceController:(UIViewController *)source {
+    
+    return  self.extensionPresentationController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    
+    return self.extensionPresentationController;
+}
+
+- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+                                                      presentingViewController:(UIViewController *)presenting
+                                                          sourceViewController:(UIViewController *)source {
+    
+    
+    self.extensionPresentationController = [[BEExtensionPresentationController alloc] initWithPresentedViewController:presented
+                                                                                             presentingViewController:presenting];
+    
+    return self.extensionPresentationController;
+}
+
+- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id<UIViewControllerAnimatedTransitioning>)animator {
+    
+    return self.interactiveAnimator;
+}
+
+- (CGFloat)dismissThresholdFor:(BEExtensibleViewController *)extensibleViewController {
+    
+    return self.extendableView.frame.origin.y;
+}
+
+- (void)extensibleViewController:(BEExtensibleViewController *)extensibleViewController updateProgress:(CGFloat)currentProgress {
+    
+    CGFloat ratio = [extensibleViewController ratioOfStatusBarOffsetToContentHeight:self.view.bounds.size.height];
+    CGFloat infinitesimal = ratio * currentProgress;
+    CGFloat scale = 1 - ratio + infinitesimal;
+    
+    self.selectedViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
 }
 
 @end
