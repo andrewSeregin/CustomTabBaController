@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 #import "BEExtensibleViewController.h"
 #import "BEExtensibleViewControllerDelegate.h"
 
@@ -35,6 +34,5 @@
 - (__kindof UIView *)newExtendableView;
 - (void)extend;
 - (BEExtensibleViewController *)extensibleViewController;;
-
 
 @end
