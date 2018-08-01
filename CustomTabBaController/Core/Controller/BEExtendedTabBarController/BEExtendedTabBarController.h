@@ -33,6 +33,8 @@
 
 - (__kindof UIView *)newExtendableView;
 - (void)extend;
-- (BEExtensibleViewController *)extensibleViewController;;
+- (BEExtensibleViewController *)extensibleViewController;
+
+- (void)setExtendableViewHidden:(BOOL)hidden animated:(BOOL)animated;
 
 @end

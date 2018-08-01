@@ -11,6 +11,8 @@
 
 @interface AppDelegate ()
 
+@property (nonatomic, strong) BEExtendedTabBarController *rootViewController;
+
 @end
 
 @implementation AppDelegate
@@ -20,14 +22,27 @@
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
+    self.rootViewController = rootViewController;
     self.window.rootViewController = rootViewController;
     [self.window makeKeyAndVisible];
+    
     
     BETabBarItem *itemOne = [[BETabBarItem alloc] initWithTitle:@"window"
                                                           image: [UIImage imageNamed:@"window"]
                                                             tag:1055];
     itemOne.associatedController = [UIViewController new];
     itemOne.associatedController.view.backgroundColor = UIColor.greenColor;
+    
+//    UIButton *button = [[UIButton alloc] init];
+//    [button setTitle:@"Buton" forState:UIControlStateNormal];
+//    [button addTarget:self action:@selector(handleTap) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    button.translatesAutoresizingMaskIntoConstraints = NO;
+//    [itemOne.associatedController.view addSubview:button];
+//    [NSLayoutConstraint activateConstraints:@[[button.centerXAnchor constraintEqualToAnchor:itemOne.associatedController.view.centerXAnchor],
+//                                              [button.centerYAnchor constraintEqualToAnchor:itemOne.associatedController.view.centerYAnchor]]];
+    
+    
 
     BETabBarItem *itemTwo = [[BETabBarItem alloc] initWithTitle:@"paper_piece"
                                                           image: [UIImage imageNamed:@"paper_piece"]
@@ -37,10 +52,15 @@
     [rootViewController setItems:@[itemOne,
                                    itemTwo]];
     
+    
+    
 
     return YES;
 }
 
+- (void)handleTap {
+    [self.rootViewController setExtendableViewHidden:YES animated:YES];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

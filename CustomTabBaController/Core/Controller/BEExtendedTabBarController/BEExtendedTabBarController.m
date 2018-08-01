@@ -15,8 +15,11 @@
 
 @interface BEExtendedTabBarController  ()
 
+@property (nonatomic, strong) NSLayoutConstraint *extendableViewBottomConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *tabBarHeightConstraint;
+
 @property (nonatomic, strong) BELayoutContainerView *layoutContainerView;
+
 
 @end
 
@@ -85,9 +88,10 @@
     
     [self.view insertSubview:self.extendableView belowSubview:self.tabBar];
     self.extendableView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.extendableViewBottomConstraint = [self.extendableView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor];
     [NSLayoutConstraint activateConstraints:@[[self.extendableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
                                               [self.extendableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-                                              [self.extendableView.bottomAnchor constraintEqualToAnchor:self.tabBar.topAnchor],
+                                              self.extendableViewBottomConstraint,
                                               [self.extendableView.heightAnchor constraintEqualToConstant:71]]];
 }
 
@@ -217,6 +221,30 @@
     CGFloat scale = 1 - ratio + infinitesimal;
     
     self.selectedViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
+}
+
+- (void)setExtendableViewHidden:(BOOL)hidden animated:(BOOL)animated {
+    
+    CGFloat alpha = 0.f;
+    CGFloat constant = self.tabBarHeightConstraint.constant;
+    if (!hidden) {
+        alpha = 1.f;
+        constant = 0.f;
+    }
+    self.extendableViewBottomConstraint.constant = constant;
+    if (animated) {
+        
+        [UIView animateWithDuration:0.7 animations:^{
+            self.extendableView.alpha = alpha;
+            [self.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+            [self.extendableView setHidden:hidden];
+        }];
+    } else {
+        self.extendableView.alpha = alpha;
+        [self.extendableView setHidden:hidden];
+    }
+    
 }
 
 @end
