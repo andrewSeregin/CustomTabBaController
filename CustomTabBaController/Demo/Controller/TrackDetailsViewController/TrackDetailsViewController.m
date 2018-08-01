@@ -38,7 +38,7 @@
     
     [self applyConstraints];
     [self.header addTarget:self
-                    action:@selector(handleTapRecogniser)
+                    action:@selector(handleTapGesture)
           forControlEvents:UIControlEventTouchDragInside];
 }
 
@@ -89,7 +89,7 @@
     
 }
 
--  (void)handleShrinkAnimation {
+-  (void)animateShrink {
     
     [self.header setHidden:YES];
     self.cover.layer.cornerRadius = 3;
@@ -105,7 +105,7 @@
     self.headerWidthConstraint.constant = 0;
 }
 
-- (void)handleExpandAnimation {
+- (void)animateExpand {
     
     [self.header setHidden:NO];
     self.headerLeftConstraint.constant = (self.view.bounds.size.width - 100) / 2;
@@ -123,11 +123,18 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
+    
     return UIStatusBarStyleLightContent;
 }
 
--(void)handleTapRecogniser {
+-(void)handleTapGesture {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (nullable UIScrollView *) oservableScrollView {
+    
+    return self.scroll;
 }
 
 @end

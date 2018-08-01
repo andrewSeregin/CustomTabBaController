@@ -17,6 +17,7 @@
 		B15EAF57211060BD000C066D /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF55211060BD000C066D /* PlayerView.m */; };
 		B15EAF5C21106123000C066D /* TrackDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5B21106123000C066D /* TrackDetailsViewController.m */; };
 		B15EAF6021106206000C066D /* PlayerTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */; };
+		B166FF352111F6CB00A33FD0 /* BETransformNormalizer.m in Sources */ = {isa = PBXBuildFile; fileRef = B166FF342111F6CB00A33FD0 /* BETransformNormalizer.m */; };
 		B192EA0D210748F800355080 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B192EA0C210748F800355080 /* AppDelegate.m */; };
 		B192EA13210748F900355080 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B192EA11210748F900355080 /* Main.storyboard */; };
 		B192EA152107490800355080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B192EA142107490800355080 /* Assets.xcassets */; };
@@ -53,6 +54,8 @@
 		B15EAF5B21106123000C066D /* TrackDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackDetailsViewController.m; sourceTree = "<group>"; };
 		B15EAF5E21106205000C066D /* PlayerTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerTabBarViewController.h; sourceTree = "<group>"; };
 		B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerTabBarViewController.m; sourceTree = "<group>"; };
+		B166FF332111F6CB00A33FD0 /* BETransformNormalizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BETransformNormalizer.h; sourceTree = "<group>"; };
+		B166FF342111F6CB00A33FD0 /* BETransformNormalizer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BETransformNormalizer.m; sourceTree = "<group>"; };
 		B192EA08210748F800355080 /* CustomTabBaController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CustomTabBaController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B192EA0B210748F800355080 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B192EA0C210748F800355080 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -114,8 +117,8 @@
 		B15EAF2A21104B0B000C066D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				B15EAF4121105292000C066D /* BEBounceResolver.h */,
-				B15EAF4021105292000C066D /* BEBounceResolver.m */,
+				B166FF362111F74B00A33FD0 /* BEBounceResolver */,
+				B166FF322111F6B900A33FD0 /* BETransformNormalizer */,
 				B15EAF43211052AE000C066D /* Categories */,
 			);
 			path = Utilities;
@@ -221,6 +224,24 @@
 				B15EAF5F21106205000C066D /* PlayerTabBarViewController.m */,
 			);
 			path = PlayerTabBarViewController;
+			sourceTree = "<group>";
+		};
+		B166FF322111F6B900A33FD0 /* BETransformNormalizer */ = {
+			isa = PBXGroup;
+			children = (
+				B166FF332111F6CB00A33FD0 /* BETransformNormalizer.h */,
+				B166FF342111F6CB00A33FD0 /* BETransformNormalizer.m */,
+			);
+			path = BETransformNormalizer;
+			sourceTree = "<group>";
+		};
+		B166FF362111F74B00A33FD0 /* BEBounceResolver */ = {
+			isa = PBXGroup;
+			children = (
+				B15EAF4121105292000C066D /* BEBounceResolver.h */,
+				B15EAF4021105292000C066D /* BEBounceResolver.m */,
+			);
+			path = BEBounceResolver;
 			sourceTree = "<group>";
 		};
 		B192E9FF210748F800355080 = {
@@ -381,6 +402,7 @@
 				B15EAF5221105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m in Sources */,
 				B15EAF3F2110526D000C066D /* BEExtensibleViewController.m in Sources */,
 				B15EAF4D21105378000C066D /* BEExtensionPresentationController.m in Sources */,
+				B166FF352111F6CB00A33FD0 /* BETransformNormalizer.m in Sources */,
 				B14DC14C210B4ECD00AF9595 /* BETabBarItem.m in Sources */,
 				B192EA3321075B9400355080 /* BEBarBackground.m in Sources */,
 				B15EAF5C21106123000C066D /* TrackDetailsViewController.m in Sources */,

@@ -19,8 +19,9 @@
 @property (nonatomic, weak) id<BEExtensibleViewControllerDelegate> delegate;
 
 - (CGFloat)ratioOfStatusBarOffsetToContentHeight:(CGFloat)denominator;
-- (void)handleShrinkAnimation;
-- (void)handleExpandAnimation;
+- (nullable UIScrollView *)oservableScrollView;
+- (void)animateShrink;
+- (void)animateExpand;
 
 @end
 

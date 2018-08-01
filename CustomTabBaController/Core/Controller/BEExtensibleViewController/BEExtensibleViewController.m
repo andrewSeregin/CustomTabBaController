@@ -8,6 +8,8 @@
 
 #import "BEExtensibleViewController.h"
 
+#import "UIView+ScrollViewDetection.h"
+
 
 @interface BEExtensibleViewController ()
 
@@ -84,6 +86,10 @@
     return extendedTabBarController.extendableView.frame.origin.y;
 }
 
+- (nullable UIScrollView *)oservableScrollView {
+    
+    return nil;
+}
 
 - (void)handlePanRecognizer:(UIPanGestureRecognizer *)gestureRecognizer {
 
@@ -99,8 +105,9 @@
 
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
-            if (!self.bounceResolver) {
-                self.bounceResolver = [[BEBounceResolver alloc] initForRootView:self.view];
+            if (!self.bounceResolver && self.oservableScrollView) {
+                self.bounceResolver = [[BEBounceResolver alloc] initWithRootView:self.view
+                                                         forObservableScrollView:self.oservableScrollView];
             }
             break;
         case UIGestureRecognizerStateChanged:
@@ -130,8 +137,8 @@
     }
 }
 
-- (void)handleShrinkAnimation {}
-- (void)handleExpandAnimation {}
+- (void)animateShrink {}
+- (void)animateExpand {}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     

@@ -26,16 +26,11 @@
 
 @end
 
+
 @implementation BEExtendedTabBarController 
 
 @synthesize tabBar = _tabBar;
 @synthesize extendableView = _extendableView;
-
-- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
-    
-    self.viewControllers = viewControllers;
-    self.tabBar.items = items;
-}
 
 - (__kindof UIView*)extendableView {
     
@@ -58,7 +53,7 @@
     [self prepareExtendableView];
     
     [self.extendableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(handleTapRecogniser)]];
+                                                                                      action:@selector(handleTapGesture)]];
     self.interactiveAnimator = [[BEExtensionPercentDrivenInteractiveTransition alloc] initWithSourceView: self.extendableView];
     self.interactiveAnimator.delegate = self;
     
@@ -155,6 +150,15 @@
                                               [controller.view.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor]]];
 }
 
+- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
+    
+    if (viewControllers.count == items.count) {
+        self.viewControllers = viewControllers;
+        self.tabBar.items = items;
+    }
+}
+
+
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     if (selectedIndex < self.tabBar.items.count) {
         _selectedIndex = selectedIndex;
@@ -167,7 +171,7 @@
     return nil;
 }
 
-- (void)handleTapRecogniser {
+- (void)handleTapGesture {
     
     [self extend];
 }

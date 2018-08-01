@@ -10,14 +10,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "UIView+ScrollViewDetection.h"
-
 
 @interface BEBounceResolver : NSObject <UIScrollViewDelegate>
 
 @property (nonatomic, assign, readonly) BOOL isDismissEnabled;
 
-- (instancetype)initForRootView:(UIView *)rootView;
+- (nullable instancetype)initWithRootView:(UIView *)rootView forObservableScrollView:(nullable UIScrollView *)scrollView;
 
 - (CGAffineTransform)currentTransform;
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation;

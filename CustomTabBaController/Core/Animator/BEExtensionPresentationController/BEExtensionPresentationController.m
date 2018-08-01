@@ -138,7 +138,7 @@
                          extendedTabBarController.selectedViewController.view.layer.cornerRadius = 10;
                          
                          self.snapshotConstraint.constant = self.tabBarSnapshot.bounds.size.height;
-                         [extensionViewController handleExpandAnimation];
+                         [extensionViewController animateExpand];
                          
                          self.presentedControllerHeightConstraint.constant = self.containerView.bounds.size.height - 50;
                          self.presentedControllerTopConstraint.constant = 50;
@@ -171,7 +171,7 @@
                          self.snapshotConstraint.constant = 0;
                          self.presentedControllerTopConstraint.constant = extendedTabBarController.extendableView.frame.origin.y - extensionViewController.view.transform.ty;
                          self.presentedControllerHeightConstraint.constant = UIScreen.mainScreen.bounds.size.height - extendedTabBarController.extendableView.frame.origin.y;
-                         [extensionViewController handleShrinkAnimation];
+                         [extensionViewController animateShrink];
                          [self.containerView layoutIfNeeded];
                          self.presentedView.layer.cornerRadius = 0;
                          

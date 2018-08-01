@@ -7,51 +7,7 @@
 //
 
 #import "BEBounceResolver.h"
-
-
-@interface BETransformNormalizer : NSObject
-
-@property (nonatomic, assign) BOOL needNormalization;
-@property (nonatomic, strong) BEBounceResolver *bounceResolver;
-
-- (instancetype)initWithBounceResolver:(BEBounceResolver *)bounceResolver;
-- (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation;
-
-@end
-
-@interface BETransformNormalizer ()
-
-@property (nonatomic, strong) NSNumber *deltaY;
-
-@end
-
-
-@implementation BETransformNormalizer
-
-- (instancetype)initWithBounceResolver:(BEBounceResolver *)bounceResolver {
-    
-    self = [super init];
-    if (self) {
-        _bounceResolver = bounceResolver;
-    }
-    
-    return self;
-}
-
-- (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation {
-    
-    CGFloat originalTransform = self.bounceResolver.currentTransform.ty;
-    if (self.deltaY) {
-        originalTransform -= self.deltaY.floatValue;
-    }
-    CGFloat translationY = self.needNormalization ? originalTransform + translation : translation;
-    self.deltaY = [NSNumber numberWithFloat:translation];
-    
-    return CGAffineTransformTranslate(CGAffineTransformIdentity, 0, translationY);
-}
-
-@end
-
+#import "BETransformNormalizer.h"
 
 @interface BEBounceResolver ()
 
@@ -64,20 +20,22 @@
 
 @implementation BEBounceResolver
 
-- (instancetype)initForRootView:(UIView *)rootView {
+- (nullable instancetype)initWithRootView:(UIView *)rootView
+         forObservableScrollView:(nullable UIScrollView *)scrollView {
     
     self = [super init];
-    if (self) {
-        UIScrollView *scrollView = rootView.detectedScrollView;
-        if (!scrollView) { return nil; }
+    if (!scrollView) {
+        self = nil;
+    } else if (self) {
         _rootView = rootView;
-        _scrollView = scrollView;
         scrollView.delegate = self;
+        _scrollView = scrollView;
         _transformNormalizer = [[BETransformNormalizer alloc] initWithBounceResolver:self];
     }
     
     return self;
 }
+
 
 - (CGFloat)scrollOffset {
     
