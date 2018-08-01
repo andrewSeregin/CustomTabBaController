@@ -9,7 +9,7 @@
 #import "BEExtendedTabBarController.h"
 
 #import "BEExtendedTabBarControlleConstants.h"
-#import "BELayoutContainerView.h"
+#import "BEExtendedTabBarControllerContainerView.h"
 #import "BETabBarButton.h"
 
 
@@ -18,8 +18,11 @@
 @property (nonatomic, strong) NSLayoutConstraint *extendableViewBottomConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *tabBarHeightConstraint;
 
-@property (nonatomic, strong) BELayoutContainerView *layoutContainerView;
+@property (nonatomic, strong) BEExtendedTabBarControllerContainerView *containerView;
+@property (nonatomic, strong) NSArray<__kindof UIViewController *> *viewControllers;
 
+@property (nonatomic, strong) BEExtensionPresentationController *extensionPresentationController;
+@property (nonatomic, strong) BEExtensionPercentDrivenInteractiveTransition *interactiveAnimator;
 
 @end
 
@@ -27,6 +30,12 @@
 
 @synthesize tabBar = _tabBar;
 @synthesize extendableView = _extendableView;
+
+- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
+    
+    self.viewControllers = viewControllers;
+    self.tabBar.items = items;
+}
 
 - (__kindof UIView*)extendableView {
     
@@ -44,8 +53,8 @@
 - (void)viewDidLoad {
     
     [super viewDidLoad];
-    [self setupLayoutContainerView];
-    [self setupTabBar];
+    [self setUpContainerView];
+    [self setUpTabBar];
     [self prepareExtendableView];
     
     [self.extendableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
@@ -56,20 +65,20 @@
     
 }
 
-- (void)setupLayoutContainerView {
+- (void)setUpContainerView {
     
-    if (!self.layoutContainerView) {
-        self.layoutContainerView = [BELayoutContainerView new];
-        [self.view addSubview:self.layoutContainerView];
-        self.layoutContainerView.translatesAutoresizingMaskIntoConstraints = NO;
-        [NSLayoutConstraint activateConstraints:@[[self.layoutContainerView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-                                                  [self.layoutContainerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
-                                                  [self.layoutContainerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-                                                  [self.layoutContainerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor]]];
+    if (!self.containerView) {
+        self.containerView = [BEExtendedTabBarControllerContainerView new];
+        [self.view addSubview:self.containerView];
+        self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+        [NSLayoutConstraint activateConstraints:@[[self.containerView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+                                                  [self.containerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+                                                  [self.containerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+                                                  [self.containerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor]]];
     }
 }
 
-- (void)setupTabBar {
+- (void)setUpTabBar {
     
     if (!_tabBar) {
         _tabBar = [[BETabBar alloc] init];
@@ -132,24 +141,18 @@
     [self.selectedViewController removeFromParentViewController];
     
     NSUInteger index = [self.tabBar.items indexOfObject:item];
-    UIViewController *controller = self.tabBar.items[index].associatedController;
+    UIViewController *controller = self.viewControllers[index];
     
     [self addChildViewController:controller];
-    [self.layoutContainerView addSubview:controller.view];
+    [self.containerView addSubview:controller.view];
     [controller didMoveToParentViewController:self];
     self.selectedViewController = controller;
     
     controller.view.translatesAutoresizingMaskIntoConstraints = NO;
-    [NSLayoutConstraint activateConstraints:@[[controller.view.topAnchor constraintEqualToAnchor:self.layoutContainerView.topAnchor],
-                                              [controller.view.bottomAnchor constraintEqualToAnchor:self.layoutContainerView.bottomAnchor],
-                                              [controller.view.leftAnchor constraintEqualToAnchor:self.layoutContainerView.leftAnchor],
-                                              [controller.view.rightAnchor constraintEqualToAnchor:self.layoutContainerView.rightAnchor]]];
-}
-
-- (void)setItems:(NSArray<BETabBarItem *> *)items {
-    self.tabBar.items = items;
-    self.selectedIndex = 0;
-    
+    [NSLayoutConstraint activateConstraints:@[[controller.view.topAnchor constraintEqualToAnchor:self.containerView.topAnchor],
+                                              [controller.view.bottomAnchor constraintEqualToAnchor:self.containerView.bottomAnchor],
+                                              [controller.view.leftAnchor constraintEqualToAnchor:self.containerView.leftAnchor],
+                                              [controller.view.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor]]];
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
@@ -233,7 +236,6 @@
     }
     self.extendableViewBottomConstraint.constant = constant;
     if (animated) {
-        
         [UIView animateWithDuration:0.7 animations:^{
             self.extendableView.alpha = alpha;
             [self.view layoutIfNeeded];

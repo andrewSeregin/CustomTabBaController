@@ -89,10 +89,16 @@
         [self.stackView addArrangedSubview:current];
         current.translatesAutoresizingMaskIntoConstraints = NO;
         [[current.heightAnchor constraintEqualToAnchor:self.stackView.heightAnchor] setActive:YES];
-        if (index > 0) {
+        if (index == 0) {
+            [self didSelectButton:current];
+        } else {
             BETabBarButton *previous = (BETabBarButton *)self.stackView.arrangedSubviews[index - 1];
             [[current.widthAnchor constraintEqualToAnchor:previous.widthAnchor] setActive:YES];
         }
+//        if (index > 0) {
+//            
+//            
+//        }
     }
 }
 

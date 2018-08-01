@@ -20,41 +20,40 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
-    self.rootViewController = rootViewController;
-    self.window.rootViewController = rootViewController;
-    [self.window makeKeyAndVisible];
+    UIViewController *brownViewController = [UIViewController new];
+    brownViewController.view.backgroundColor = UIColor.brownColor;
+    
+    UIViewController *redViewController = [UIViewController new];
+    redViewController.view.backgroundColor = UIColor.redColor;
+    
+    UIButton *button = [[UIButton alloc] init];
+    [button setTitle:@"Buton" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(handleTap) forControlEvents:UIControlEventTouchUpInside];
+
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    [brownViewController.view addSubview:button];
+    [NSLayoutConstraint activateConstraints:@[[button.centerXAnchor constraintEqualToAnchor:brownViewController.view.centerXAnchor],
+                                              [button.centerYAnchor constraintEqualToAnchor:brownViewController.view.centerYAnchor]]];
     
     
     BETabBarItem *itemOne = [[BETabBarItem alloc] initWithTitle:@"window"
                                                           image: [UIImage imageNamed:@"window"]
                                                             tag:1055];
-    itemOne.associatedController = [UIViewController new];
-    itemOne.associatedController.view.backgroundColor = UIColor.greenColor;
-    
-//    UIButton *button = [[UIButton alloc] init];
-//    [button setTitle:@"Buton" forState:UIControlStateNormal];
-//    [button addTarget:self action:@selector(handleTap) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    button.translatesAutoresizingMaskIntoConstraints = NO;
-//    [itemOne.associatedController.view addSubview:button];
-//    [NSLayoutConstraint activateConstraints:@[[button.centerXAnchor constraintEqualToAnchor:itemOne.associatedController.view.centerXAnchor],
-//                                              [button.centerYAnchor constraintEqualToAnchor:itemOne.associatedController.view.centerYAnchor]]];
-    
-    
-
     BETabBarItem *itemTwo = [[BETabBarItem alloc] initWithTitle:@"paper_piece"
                                                           image: [UIImage imageNamed:@"paper_piece"]
                                                             tag:1056];
-    itemTwo.associatedController = [UIViewController new];
-    itemTwo.associatedController.view.backgroundColor = UIColor.brownColor;
-    [rootViewController setItems:@[itemOne,
-                                   itemTwo]];
     
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
+    BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
+    self.rootViewController = rootViewController;
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
     
-
+    [rootViewController setViewControllers:@[redViewController,
+                                             brownViewController]
+                        forAssosiatedItems:@[itemOne,
+                                             itemTwo]];
     return YES;
 }
 

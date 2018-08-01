@@ -25,11 +25,9 @@
 
 @property (nonatomic) NSUInteger selectedIndex;
 @property (nonatomic, assign) __kindof UIViewController *selectedViewController;
+@property (nonatomic, strong, readonly) NSArray<__kindof UIViewController *> *viewControllers;
 
-@property (nonatomic, strong) BEExtensionPresentationController *extensionPresentationController;
-@property (nonatomic, strong) BEExtensionPercentDrivenInteractiveTransition *interactiveAnimator;
-
-- (void)setItems:(NSArray<BETabBarItem *> *)items;
+- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items;
 
 - (__kindof UIView *)newExtendableView;
 - (void)extend;

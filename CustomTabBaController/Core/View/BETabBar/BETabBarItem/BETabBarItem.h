@@ -10,6 +10,6 @@
 
 @interface BETabBarItem : UITabBarItem
 
-@property (nonatomic, strong) UIViewController *associatedController;
+//@property (nonatomic, strong) UIViewController *associatedController;
 
 @end
