@@ -259,7 +259,7 @@
     }
 }
 
-- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
+- (void)configureWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers tabBarItems:(NSArray<BETabBarItem *> *)items {
     
     if (viewControllers.count == items.count) {
         self.viewControllers = viewControllers;

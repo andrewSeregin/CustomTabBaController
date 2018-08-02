@@ -45,10 +45,10 @@
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
-    [rootViewController setViewControllers:@[redViewController,
-                                             brownViewController]
-                        forAssosiatedItems:@[itemOne,
-                                             itemTwo]];
+    [rootViewController configureWithViewControllers:@[redViewController,
+                                                       brownViewController]
+                                         tabBarItems:@[itemOne,
+                                                       itemTwo]];
     
     self.rootViewController = rootViewController;
     self.window.rootViewController = rootViewController;

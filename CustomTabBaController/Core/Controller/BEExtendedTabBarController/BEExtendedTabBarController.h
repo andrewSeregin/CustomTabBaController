@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)extendAnimated:(BOOL)animated;
 - (BEExtensibleViewController *)extensibleViewController;
 - (void)setExtendableViewHidden:(BOOL)hidden animated:(BOOL)animated;
-- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items;
+- (void)configureWithViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers tabBarItems:(NSArray<BETabBarItem *> *)items;
 
 @end
 
