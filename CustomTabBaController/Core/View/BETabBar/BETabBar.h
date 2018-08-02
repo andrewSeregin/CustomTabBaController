@@ -15,6 +15,8 @@
 #import "BETabBarDelegate.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETabBar : UIView
 
 @property (nonatomic, strong) UIColor *selectionTintColor;
@@ -26,3 +28,5 @@
 - (UIView *)snapshotTabBarWithSeparator:(BOOL)includingSeparator;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -13,6 +13,8 @@
 #import "BEExtensibleViewControllerDelegate.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtensibleViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readonly) UIOffset statusBarOffset;
@@ -26,5 +28,6 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 

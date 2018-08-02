@@ -10,6 +10,8 @@
 
 #import "BEExtendedTabBarController.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETabBar ()
 
 @property (nonatomic, strong) UIStackView *stackView;
@@ -86,7 +88,7 @@
     [self updateTabBarItems];
 }
 
-- (void)setSelectedItem:(BETabBarItem *)selectedItem {
+- (void)setSelectedItem:(nullable BETabBarItem *)selectedItem {
     _selectedItem = selectedItem;
     BETabBarButton *barButton = (BETabBarButton *)self.stackView.arrangedSubviews[[self.items indexOfObject:selectedItem]];
     [self didSelectButton:barButton];
@@ -164,3 +166,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

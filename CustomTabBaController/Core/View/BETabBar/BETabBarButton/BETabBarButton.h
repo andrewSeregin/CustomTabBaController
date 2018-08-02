@@ -11,20 +11,18 @@
 #import "BETabBarItem.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETabBarButton : UIControl
 
-
 @property (nonatomic, strong, nullable) NSString *title;
-@property (nonatomic, strong, nonnull) UIImage *image;
+@property (nonatomic, strong, nullable) UIImage *image;
 
 @property (nonatomic, strong, nullable) UIColor *selectedTintColor;
 
-NS_ASSUME_NONNULL_BEGIN
-
 - (instancetype)initFromTabBarItem:(BETabBarItem *)item;
-
-NS_ASSUME_NONNULL_END
-
 - (void)orientationChanged:(UIDeviceOrientation)orientation;
 
 @end
+
+NS_ASSUME_NONNULL_END

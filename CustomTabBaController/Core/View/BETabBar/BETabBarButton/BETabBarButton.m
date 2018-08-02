@@ -22,9 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
 
 @implementation BETabBarButton
+
+#pragma mark - Initialization
 
 - (instancetype)init {
     
@@ -84,7 +85,9 @@ NS_ASSUME_NONNULL_END
     
 }
 
-- (void)setTintColor:(UIColor *)tintColor {
+#pragma mark - Get/Set Methods
+
+- (void)setTintColor:(nullable UIColor *)tintColor {
     [super setTintColor:tintColor];
     self.titleLabel.textColor = self.tintColor;
     self.imageView.tintColor = self.tintColor;
@@ -96,6 +99,8 @@ NS_ASSUME_NONNULL_END
     self.titleLabel.textColor = selected ? self.selectedTintColor : self.tintColor;
     self.imageView.tintColor = selected ? self.selectedTintColor : self.tintColor;
 }
+
+#pragma mark - Regular Methods
 
 - (void)orientationChanged:(UIDeviceOrientation)orientation {
 
@@ -112,5 +117,6 @@ NS_ASSUME_NONNULL_END
     }
 }
 
-
 @end
+
+NS_ASSUME_NONNULL_END

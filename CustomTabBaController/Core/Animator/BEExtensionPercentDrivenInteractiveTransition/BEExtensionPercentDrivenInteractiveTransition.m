@@ -19,8 +19,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-
 
 @implementation BEExtensionPercentDrivenInteractiveTransition
 
@@ -76,3 +74,5 @@ NS_ASSUME_NONNULL_END
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

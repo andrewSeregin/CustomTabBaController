@@ -10,8 +10,13 @@
 
 #import "BEExtendedTabBarController.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtensionPresentationController : UIPresentationController <UIViewControllerAnimatedTransitioning>
 
-@property (nonatomic, strong) UIView *tabBarSnapshot;
+@property (nonatomic, strong, nullable) UIView *tabBarSnapshot;
 
 @end
+
+NS_ASSUME_NONNULL_END

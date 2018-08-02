@@ -8,6 +8,8 @@
 
 #import "BETabBarItem.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation BETabBarItem
 
 #pragma mark - Initialization
@@ -25,3 +27,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -10,6 +10,9 @@
 
 #import "BEBounceResolver.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETransformNormalizer : NSObject
 
 @property (nonatomic, assign) BOOL needNormalization;
@@ -19,3 +22,5 @@
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation;
 
 @end
+
+NS_ASSUME_NONNULL_END

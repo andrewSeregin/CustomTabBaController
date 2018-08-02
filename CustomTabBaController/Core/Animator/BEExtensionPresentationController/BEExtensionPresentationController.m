@@ -11,6 +11,8 @@
 #import "BEExtensionPresentationController.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtensionPresentationController ()
 
 @property (nonatomic, assign, getter=isPresented) BOOL presented;
@@ -28,7 +30,7 @@
 #pragma mark - Initialization
 
 - (instancetype)initWithPresentedViewController:(UIViewController *)presentedViewController
-                       presentingViewController:(UIViewController *)presentingViewController {
+                       presentingViewController:(UIViewController * _Nullable)presentingViewController {
     
     self = [super initWithPresentedViewController:presentedViewController presentingViewController:presentingViewController];
     
@@ -82,7 +84,7 @@
 
 #pragma mark - <UIViewControllerAnimatedTransitioning>
 
-- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning> _Nullable)transitionContext {
     return 0.6;
 }
 
@@ -195,3 +197,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

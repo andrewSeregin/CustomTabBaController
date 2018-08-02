@@ -20,8 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-NS_ASSUME_NONNULL_END
-
 @implementation BEBounceResolver
 
 #pragma mark - Initialization
@@ -107,4 +105,6 @@ NS_ASSUME_NONNULL_END
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
 

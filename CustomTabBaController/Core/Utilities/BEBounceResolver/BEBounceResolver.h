@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEBounceResolver : NSObject <UIScrollViewDelegate>
 
 @property (nonatomic, assign, readonly) BOOL isDismissEnabled;
@@ -19,3 +21,5 @@
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation;
 
 @end
+
+NS_ASSUME_NONNULL_END

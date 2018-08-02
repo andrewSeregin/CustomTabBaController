@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETabBarItem : NSObject
 
 @property (nonatomic, nullable, strong) UIImage *image;
 @property (nonatomic, nullable, strong) NSString *title;
 
-NS_ASSUME_NONNULL_BEGIN
-
 - (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END

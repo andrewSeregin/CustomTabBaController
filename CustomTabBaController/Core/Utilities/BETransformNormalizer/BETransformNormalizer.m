@@ -8,9 +8,12 @@
 
 #import "BETransformNormalizer.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BETransformNormalizer ()
 
-@property (nonatomic, strong) NSNumber *deltaY;
+@property (nonatomic, nullable, strong) NSNumber *deltaY;
 
 @end
 
@@ -46,3 +49,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

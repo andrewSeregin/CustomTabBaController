@@ -11,14 +11,14 @@
 #import "BEExtensionPercentDrivenInteractiveTransitionDelegate.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtensionPercentDrivenInteractiveTransition : UIPercentDrivenInteractiveTransition
 
 @property (nonatomic, weak) id<BEExtensionPercentDrivenInteractiveTransitionDelegate> delegate;
 
-NS_ASSUME_NONNULL_BEGIN
-
 - (instancetype)initWithSourceView:(UIView *)sourceView;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+NS_ASSUME_NONNULL_END

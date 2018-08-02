@@ -13,6 +13,8 @@
 #import "BETabBarButton.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtendedTabBarController  ()
 
 @property (nonatomic, strong) NSLayoutConstraint *extendableViewBottomConstraint;
@@ -139,20 +141,20 @@
 
 #pragma mark - <UIViewControllerTransitioningDelegate>
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
+- (nullable id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
                                                                       sourceController:(UIViewController *)source {
     
     return  self.extensionPresentationController;
 }
 
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+- (nullable id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     
     return self.extensionPresentationController;
 }
 
-- (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
-                                                      presentingViewController:(UIViewController *)presenting
+- (nullable UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented
+                                                      presentingViewController:(nullable UIViewController *)presenting
                                                           sourceViewController:(UIViewController *)source {
     
     self.extensionPresentationController = [[BEExtensionPresentationController alloc] initWithPresentedViewController:presented
@@ -161,7 +163,7 @@
     return self.extensionPresentationController;
 }
 
-- (id<UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id<UIViewControllerAnimatedTransitioning>)animator {
+- (nullable id<UIViewControllerInteractiveTransitioning>)interactionControllerForPresentation:(id<UIViewControllerAnimatedTransitioning>)animator {
     
     return self.interactiveAnimator;
 }
@@ -277,3 +279,5 @@
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
