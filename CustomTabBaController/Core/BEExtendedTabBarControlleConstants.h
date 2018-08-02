@@ -7,17 +7,18 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+
+#include <UIKit/UIKit.h>
 
 
-FOUNDATION_EXPORT float const BETabBarHeightVertical;
-FOUNDATION_EXPORT float const BETabBarHeightHorizontal;
+UIKIT_EXTERN CGFloat const BETabBarHeightVertical;
+UIKIT_EXTERN CGFloat const BETabBarHeightHorizontal;
 
-FOUNDATION_EXPORT float const BETabBarButtonImageSizeVertical;
-FOUNDATION_EXPORT float const BETabBarButtonImageSizeHorizontal;
+UIKIT_EXTERN CGFloat const BETabBarButtonImageSizeVertical;
+UIKIT_EXTERN CGFloat const BETabBarButtonImageSizeHorizontal;
 
-FOUNDATION_EXPORT float const BETabBarButtonFontSizeVertical;
-FOUNDATION_EXPORT float const BETabBarButtonFontSizeHorizontal;
+UIKIT_EXTERN CGFloat const BETabBarButtonFontSizeVertical;
+UIKIT_EXTERN CGFloat const BETabBarButtonFontSizeHorizontal;
 
-FOUNDATION_EXPORT float const BETabBarButtonSpacingVertical;
-FOUNDATION_EXPORT float const BETabBarButtonSpacingHorizontal;
+UIKIT_EXTERN CGFloat const BETabBarButtonSpacingVertical;
+UIKIT_EXTERN CGFloat const BETabBarButtonSpacingHorizontal;

@@ -125,7 +125,7 @@
     [self.containerView layoutIfNeeded];
     self.presentedView.clipsToBounds = YES;
     
-    CGFloat scale = 1 - [extensionViewController ratioOfStatusBarOffsetToContentHeight:extendedTabBarController.view.bounds.size.height];
+    CGFloat scale = 1 - [extensionViewController statusBarOffsetToContentHeightRatio:extendedTabBarController.view.bounds.size.height];
     
     [UIView animateWithDuration:0.6
                           delay:0

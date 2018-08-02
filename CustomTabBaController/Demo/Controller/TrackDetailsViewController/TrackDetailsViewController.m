@@ -132,7 +132,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (nullable UIScrollView *) oservableScrollView {
+- (nullable UIScrollView *) observableScrollView {
     
     return self.scroll;
 }

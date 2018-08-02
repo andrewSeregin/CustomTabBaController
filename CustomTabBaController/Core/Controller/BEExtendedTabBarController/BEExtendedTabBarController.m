@@ -223,7 +223,7 @@
 
 - (void)extensibleViewController:(BEExtensibleViewController *)extensibleViewController updateProgress:(CGFloat)currentProgress {
     
-    CGFloat ratio = [extensibleViewController ratioOfStatusBarOffsetToContentHeight:self.view.bounds.size.height];
+    CGFloat ratio = [extensibleViewController statusBarOffsetToContentHeightRatio:self.view.bounds.size.height];
     CGFloat infinitesimal = ratio * currentProgress;
     CGFloat scale = 1 - ratio + infinitesimal;
     

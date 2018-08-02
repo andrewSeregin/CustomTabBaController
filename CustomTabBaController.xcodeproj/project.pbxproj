@@ -11,7 +11,6 @@
 		B14DC14C210B4ECD00AF9595 /* BETabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B14DC14B210B4ECD00AF9595 /* BETabBarItem.m */; };
 		B15EAF3F2110526D000C066D /* BEExtensibleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF3D2110526C000C066D /* BEExtensibleViewController.m */; };
 		B15EAF4221105292000C066D /* BEBounceResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF4021105292000C066D /* BEBounceResolver.m */; };
-		B15EAF49211052CF000C066D /* UIView+ScrollViewDetection.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */; };
 		B15EAF4D21105378000C066D /* BEExtensionPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF4B21105378000C066D /* BEExtensionPresentationController.m */; };
 		B15EAF5221105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF5121105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m */; };
 		B15EAF57211060BD000C066D /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B15EAF55211060BD000C066D /* PlayerView.m */; };
@@ -41,8 +40,6 @@
 		B15EAF3E2110526D000C066D /* BEExtensibleViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensibleViewControllerDelegate.h; sourceTree = "<group>"; };
 		B15EAF4021105292000C066D /* BEBounceResolver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEBounceResolver.m; sourceTree = "<group>"; };
 		B15EAF4121105292000C066D /* BEBounceResolver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEBounceResolver.h; sourceTree = "<group>"; };
-		B15EAF45211052CF000C066D /* UIView+ScrollViewDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ScrollViewDetection.h"; sourceTree = "<group>"; };
-		B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScrollViewDetection.m"; sourceTree = "<group>"; };
 		B15EAF4B21105378000C066D /* BEExtensionPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEExtensionPresentationController.m; sourceTree = "<group>"; };
 		B15EAF4C21105378000C066D /* BEExtensionPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensionPresentationController.h; sourceTree = "<group>"; };
 		B15EAF4F21105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEExtensionPercentDrivenInteractiveTransitionDelegate.h; sourceTree = "<group>"; };
@@ -119,7 +116,6 @@
 			children = (
 				B166FF362111F74B00A33FD0 /* BEBounceResolver */,
 				B166FF322111F6B900A33FD0 /* BETransformNormalizer */,
-				B15EAF43211052AE000C066D /* Categories */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -149,15 +145,6 @@
 				B15EAF3E2110526D000C066D /* BEExtensibleViewControllerDelegate.h */,
 			);
 			path = BEExtensibleViewController;
-			sourceTree = "<group>";
-		};
-		B15EAF43211052AE000C066D /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				B15EAF45211052CF000C066D /* UIView+ScrollViewDetection.h */,
-				B15EAF47211052CF000C066D /* UIView+ScrollViewDetection.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		B15EAF4A2110535C000C066D /* BEExtensionPresentationController */ = {
@@ -398,7 +385,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B15EAF49211052CF000C066D /* UIView+ScrollViewDetection.m in Sources */,
 				B15EAF5221105A6D000C066D /* BEExtensionPercentDrivenInteractiveTransition.m in Sources */,
 				B15EAF3F2110526D000C066D /* BEExtensibleViewController.m in Sources */,
 				B15EAF4D21105378000C066D /* BEExtensionPresentationController.m in Sources */,

@@ -9,14 +9,14 @@
 #import "BEExtendedTabBarControlleConstants.h"
 
 
-float const BETabBarHeightVertical = 49;
-float const BETabBarHeightHorizontal = 31;
+CGFloat const BETabBarHeightVertical = 49;
+CGFloat const BETabBarHeightHorizontal = 31;
 
-float const BETabBarButtonImageSizeVertical = 28;
-float const BETabBarButtonImageSizeHorizontal = 20;
+CGFloat const BETabBarButtonImageSizeVertical = 28;
+CGFloat const BETabBarButtonImageSizeHorizontal = 20;
 
-float const BETabBarButtonFontSizeVertical = 12;
-float const BETabBarButtonFontSizeHorizontal = 14;
+CGFloat const BETabBarButtonFontSizeVertical = 12;
+CGFloat const BETabBarButtonFontSizeHorizontal = 14;
 
-float const BETabBarButtonSpacingVertical = 3;
-float const BETabBarButtonSpacingHorizontal = 5;
+CGFloat const BETabBarButtonSpacingVertical = 3;
+CGFloat const BETabBarButtonSpacingHorizontal = 5;

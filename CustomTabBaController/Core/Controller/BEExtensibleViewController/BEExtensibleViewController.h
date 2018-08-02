@@ -18,8 +18,8 @@
 @property (nonatomic, assign, readonly) UIOffset statusBarOffset;
 @property (nonatomic, weak) id<BEExtensibleViewControllerDelegate> delegate;
 
-- (CGFloat)ratioOfStatusBarOffsetToContentHeight:(CGFloat)denominator;
-- (nullable UIScrollView *)oservableScrollView;
+- (CGFloat)statusBarOffsetToContentHeightRatio:(CGFloat)ratio;
+- (nullable UIScrollView *)observableScrollView;
 - (void)animateShrink;
 - (void)animateExpand;
 

@@ -8,8 +8,6 @@
 
 #import "BEExtensibleViewController.h"
 
-#import "UIView+ScrollViewDetection.h"
-
 
 @interface BEExtensibleViewController ()
 
@@ -31,10 +29,9 @@
     
     return  UIOffsetMake(0, UIApplication.sharedApplication.statusBarFrame.size.height * 1.5);
 }
-
-- (CGFloat)ratioOfStatusBarOffsetToContentHeight:(CGFloat)contentHeight {
+- (CGFloat)statusBarOffsetToContentHeightRatio:(CGFloat)ratio {
     
-    return self.statusBarOffset.vertical / contentHeight;
+    return self.statusBarOffset.vertical / ratio;
 }
 
 - (void)prepareGestureRecognizers {
@@ -63,16 +60,19 @@
 
 - (CGFloat)elasticTranslationFromTranslation:(CGFloat)currentTranslation {
     
-    CGFloat factor = 1/2;
-    CGFloat threshold = 120;
+    CGFloat factor = 0.5f;
+    CGFloat threshold = 120.f;
     
+    CGFloat elasticTranslation = 0;
     if (currentTranslation < threshold) {
-        return currentTranslation * factor;
+        elasticTranslation = currentTranslation * factor;
+    } else {
+        CGFloat length = currentTranslation - threshold;
+        CGFloat friction = 30.f * atanf(length / 120.f) + length / 3.f;
+        elasticTranslation = friction + threshold * factor;
     }
     
-    CGFloat length = currentTranslation - threshold;
-    CGFloat friction = 30 * atan(length / 120) + length / 3;
-    return friction + threshold * factor;
+    return elasticTranslation;
 }
 
 - (BOOL)allowsDismissSwipe {
@@ -86,7 +86,7 @@
     return extendedTabBarController.extendableView.frame.origin.y;
 }
 
-- (nullable UIScrollView *)oservableScrollView {
+- (nullable UIScrollView *)observableScrollView {
     
     return nil;
 }
@@ -105,9 +105,9 @@
 
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
-            if (!self.bounceResolver && self.oservableScrollView) {
+            if (!self.bounceResolver && self.observableScrollView) {
                 self.bounceResolver = [[BEBounceResolver alloc] initWithRootView:self.view
-                                                         forObservableScrollView:self.oservableScrollView];
+                                                         forObservableScrollView:self.observableScrollView];
             }
             break;
         case UIGestureRecognizerStateChanged:
