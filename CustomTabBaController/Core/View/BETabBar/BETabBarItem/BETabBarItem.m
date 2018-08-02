@@ -10,4 +10,18 @@
 
 @implementation BETabBarItem
 
+#pragma mark - Initialization
+
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image {
+    
+    self = [self init];
+    
+    if (self) {
+        _image = image;
+        _title = title;
+    }
+    
+    return self;
+}
+
 @end

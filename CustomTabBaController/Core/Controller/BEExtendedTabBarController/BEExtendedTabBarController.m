@@ -18,9 +18,9 @@
 @property (nonatomic, strong) NSLayoutConstraint *extendableViewBottomConstraint;
 @property (nonatomic, strong) NSLayoutConstraint *tabBarHeightConstraint;
 
-@property (nonatomic, strong) BEExtendedTabBarControllerContainerView *containerView;
 @property (nonatomic, strong) NSArray<__kindof UIViewController *> *viewControllers;
 
+@property (nonatomic, strong) BEExtendedTabBarControllerContainerView *containerView;
 @property (nonatomic, strong) BEExtensionPresentationController *extensionPresentationController;
 @property (nonatomic, strong) BEExtensionPercentDrivenInteractiveTransition *interactiveAnimator;
 
@@ -32,63 +32,55 @@
 @synthesize tabBar = _tabBar;
 @synthesize extendableView = _extendableView;
 
-- (__kindof UIView*)extendableView {
-    
-    if(!_extendableView) {
-        _extendableView = [self newExtendableView];
-        if (!_extendableView) {
-            _extendableView = [UIView new];
-            _extendableView.backgroundColor = UIColor.whiteColor;
-        }
-    }
-    
-    return _extendableView;
-}
+#pragma mark - View Life Cycle
 
 - (void)viewDidLoad {
     
     [super viewDidLoad];
+    
     [self setUpContainerView];
     [self setUpTabBar];
-    [self prepareExtendableView];
+    [self setUpExtendableView];
     
     [self.extendableView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(handleTapGesture)]];
+                                                                                      action:@selector(handleTapGesture:)]];
     self.interactiveAnimator = [[BEExtensionPercentDrivenInteractiveTransition alloc] initWithSourceView: self.extendableView];
     self.interactiveAnimator.delegate = self;
-    
-    
 }
+
+- (void)viewSafeAreaInsetsDidChange {
+    
+    [super viewSafeAreaInsetsDidChange];
+    
+    CGFloat tabBarHeight = self.view.bounds.size.width > self.view.bounds.size.height ? BETabBarHeightHorizontal : BETabBarHeightVertical;
+    self.tabBarHeightConstraint.constant = self.view.safeAreaInsets.bottom + tabBarHeight;
+    self.selectedViewController.additionalSafeAreaInsets = UIEdgeInsetsMake(0.f, 0.f, self.tabBarHeightConstraint.constant, 0.f);
+}
+
+#pragma mark - Set Up
 
 - (void)setUpContainerView {
     
-    if (!self.containerView) {
-        self.containerView = [BEExtendedTabBarControllerContainerView new];
-        [self.view addSubview:self.containerView];
-        self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
-        [NSLayoutConstraint activateConstraints:@[[self.containerView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
-                                                  [self.containerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
-                                                  [self.containerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-                                                  [self.containerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor]]];
-    }
+    [self.view addSubview:self.containerView];
+    self.containerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[[self.containerView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+                                              [self.containerView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+                                              [self.containerView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+                                              [self.containerView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor]]];
 }
 
 - (void)setUpTabBar {
     
-    if (!_tabBar) {
-        _tabBar = [[BETabBar alloc] init];
-        _tabBar.delegate = self;
-        [self.view addSubview:_tabBar];
-        _tabBar.translatesAutoresizingMaskIntoConstraints = NO;
-        self.tabBarHeightConstraint = [_tabBar.heightAnchor constraintEqualToConstant:BETabBarHeightVertical];
-        [NSLayoutConstraint activateConstraints:@[[_tabBar.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
-                                                  [_tabBar.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
-                                                  [_tabBar.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
-                                                  self.tabBarHeightConstraint]];
-    }
+    [self.view addSubview:self.tabBar];
+    self.tabBar.translatesAutoresizingMaskIntoConstraints = NO;
+    self.tabBarHeightConstraint = [self.tabBar.heightAnchor constraintEqualToConstant:BETabBarHeightVertical];
+    [NSLayoutConstraint activateConstraints:@[[self.tabBar.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
+                                              [self.tabBar.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
+                                              [self.tabBar.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
+                                              self.tabBarHeightConstraint]];
 }
 
-- (void)prepareExtendableView {
+- (void)setUpExtendableView {
     
     [self.view insertSubview:self.extendableView belowSubview:self.tabBar];
     self.extendableView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -96,38 +88,10 @@
     [NSLayoutConstraint activateConstraints:@[[self.extendableView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor],
                                               [self.extendableView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor],
                                               self.extendableViewBottomConstraint,
-                                              [self.extendableView.heightAnchor constraintEqualToConstant:71]]];
+                                              [self.extendableView.heightAnchor constraintEqualToConstant:71.f]]];
 }
 
-- (BEExtensibleViewController *)extensibleViewController {
-    
-    return  [BEExtensibleViewController new];
-}
-
--(BEExtensibleViewController *)preparedExtensibleViewController {
-    
-    BEExtensibleViewController *controller = [self extensibleViewController];
-    controller.transitioningDelegate = self;
-    controller.modalPresentationStyle = UIModalPresentationCustom;
-    controller.modalPresentationCapturesStatusBarAppearance = YES;
-    controller.delegate = self;
-    
-    return controller;
-}
-
-
-- (void)viewSafeAreaInsetsDidChange {
-    
-    [super viewSafeAreaInsetsDidChange];
-    CGFloat tabBarHeight = self.view.bounds.size.width > self.view.bounds.size.height ? BETabBarHeightHorizontal : BETabBarHeightVertical;
-    self.tabBarHeightConstraint.constant = self.view.safeAreaInsets.bottom + tabBarHeight;
-    
-    [self updateSelectedViewControllerSafeAreaInsets];
-}
-
-- (void)updateSelectedViewControllerSafeAreaInsets {
-    self.selectedViewController.additionalSafeAreaInsets = UIEdgeInsetsMake(0, 0, self.tabBarHeightConstraint.constant, 0);
-}
+#pragma mark - <BETabBarDelegate>
 
 - (void)tabBar:(BETabBar *)tabBar didSelectItem:(BETabBarItem *)item {
     
@@ -150,43 +114,30 @@
                                               [controller.view.rightAnchor constraintEqualToAnchor:self.containerView.rightAnchor]]];
 }
 
-- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
-    
-    if (viewControllers.count == items.count) {
-        self.viewControllers = viewControllers;
-        self.tabBar.items = items;
-    }
-}
-
-
-- (void)setSelectedIndex:(NSUInteger)selectedIndex {
-    if (selectedIndex < self.tabBar.items.count) {
-        _selectedIndex = selectedIndex;
-        self.tabBar.selectedItem = self.tabBar.items[selectedIndex];
-    }
-}
-
-- (__kindof UIView *)newExtendableView {
-    
-    return nil;
-}
-
-- (void)handleTapGesture {
-    
-    [self extend];
-}
+#pragma mark - <BEExtensionPercentDrivenInteractiveTransitionDelegate>
 
 - (void)percentDrivenInteractiveAnimatorWillStartTransition:(BEExtensionPercentDrivenInteractiveTransition *)animator {
     
-    [self extend];
+    [self extendAnimated:YES];
 }
 
-- (void)extend {
+#pragma mark - <BEExtensibleViewControllerDelegate>
+
+- (CGFloat)dismissThresholdFor:(BEExtensibleViewController *)extensibleViewController {
     
-    [self presentViewController:[self preparedExtensibleViewController]
-                       animated:YES
-                     completion:nil];
+    return self.extendableView.frame.origin.y;
 }
+
+- (void)extensibleViewController:(BEExtensibleViewController *)extensibleViewController updateProgress:(CGFloat)currentProgress {
+    
+    CGFloat ratio = [extensibleViewController statusBarOffsetToContentHeightRatio:self.view.bounds.size.height];
+    CGFloat infinitesimal = ratio * currentProgress;
+    CGFloat scale = 1.f - ratio + infinitesimal;
+    
+    self.selectedViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
+}
+
+#pragma mark - <UIViewControllerTransitioningDelegate>
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented
                                                                   presentingController:(UIViewController *)presenting
@@ -204,7 +155,6 @@
                                                       presentingViewController:(UIViewController *)presenting
                                                           sourceViewController:(UIViewController *)source {
     
-    
     self.extensionPresentationController = [[BEExtensionPresentationController alloc] initWithPresentedViewController:presented
                                                                                              presentingViewController:presenting];
     
@@ -216,18 +166,74 @@
     return self.interactiveAnimator;
 }
 
-- (CGFloat)dismissThresholdFor:(BEExtensibleViewController *)extensibleViewController {
+#pragma mark - Get/Set Methods
+
+- (BEExtendedTabBarControllerContainerView *)containerView {
     
-    return self.extendableView.frame.origin.y;
+    if (!_containerView) {
+        _containerView = [BEExtendedTabBarControllerContainerView new];
+    }
+    
+    return _containerView;
 }
 
-- (void)extensibleViewController:(BEExtensibleViewController *)extensibleViewController updateProgress:(CGFloat)currentProgress {
+- (__kindof UIView*)extendableView {
     
-    CGFloat ratio = [extensibleViewController statusBarOffsetToContentHeightRatio:self.view.bounds.size.height];
-    CGFloat infinitesimal = ratio * currentProgress;
-    CGFloat scale = 1 - ratio + infinitesimal;
+    if(!_extendableView) {
+        _extendableView = [self newExtendableView];
+    }
     
-    self.selectedViewController.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
+    return _extendableView;
+}
+
+- (BETabBar *)tabBar {
+    
+    if (!_tabBar) {
+        _tabBar = [BETabBar new];
+        _tabBar.delegate = self;
+    }
+    
+    return _tabBar;
+}
+
+- (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    if (selectedIndex < self.tabBar.items.count) {
+        _selectedIndex = selectedIndex;
+        self.tabBar.selectedItem = self.tabBar.items[selectedIndex];
+    }
+}
+
+#pragma mark - Regular Methods
+
+- (__kindof UIView *)newExtendableView {
+    
+    UIView *newExtendableView = [UIView new];
+    newExtendableView.backgroundColor = UIColor.whiteColor;
+    
+    return newExtendableView;
+}
+
+- (BEExtensibleViewController *)extensibleViewController {
+    
+    return  [BEExtensibleViewController new];
+}
+
+-(BEExtensibleViewController *)preparedExtensibleViewController {
+    
+    BEExtensibleViewController *controller = [self extensibleViewController];
+    controller.transitioningDelegate = self;
+    controller.modalPresentationStyle = UIModalPresentationCustom;
+    controller.modalPresentationCapturesStatusBarAppearance = YES;
+    controller.delegate = self;
+    
+    return controller;
+}
+
+- (void)extendAnimated:(BOOL)animated {
+    
+    [self presentViewController:[self preparedExtensibleViewController]
+                       animated:animated
+                     completion:nil];
 }
 
 - (void)setExtendableViewHidden:(BOOL)hidden animated:(BOOL)animated {
@@ -240,6 +246,7 @@
     }
     self.extendableViewBottomConstraint.constant = constant;
     if (animated) {
+        [self.extendableView setHidden:NO];
         [UIView animateWithDuration:0.7 animations:^{
             self.extendableView.alpha = alpha;
             [self.view layoutIfNeeded];
@@ -250,7 +257,23 @@
         self.extendableView.alpha = alpha;
         [self.extendableView setHidden:hidden];
     }
+}
+
+- (void)setViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers forAssosiatedItems:(NSArray<BETabBarItem *> *)items {
     
+    if (viewControllers.count == items.count) {
+        self.viewControllers = viewControllers;
+        self.tabBar.items = items;
+    }
+}
+
+#pragma mark - Tap Gesture Recognizer
+
+- (void)handleTapGesture:(UITapGestureRecognizer *)tapRecognizer  {
+    
+    if (tapRecognizer.state == UIGestureRecognizerStateRecognized) {
+        [self extendAnimated:YES];
+    }
 }
 
 @end

@@ -10,6 +10,7 @@
 
 #import "BEExtendedTabBarControlleConstants.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface BETabBarButton ()
 
@@ -21,28 +22,26 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 @implementation BETabBarButton
-
 
 - (instancetype)init {
     
     self = [super init];
+    
     if (self) {
-        
         self.imageView = [UIImageView new];
         self.imageView.contentMode = UIViewContentModeScaleAspectFit;
-        
+
         self.titleLabel = [UILabel new];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         
         self.stackView = [self newStackView];
         self.stackView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:self.stackView];
-        
         [NSLayoutConstraint activateConstraints:@[[self.stackView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
                                                   [self.stackView.centerYAnchor constraintEqualToAnchor:self.centerYAnchor]]];
-        
     }
     
     return self;
@@ -52,10 +51,8 @@
     
     self = [self init];
     if (self) {
-        
         self.imageView.image = [item.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
         self.titleLabel.text = item.title;
-        
     }
     
     return self;
@@ -96,8 +93,8 @@
 - (void)setSelected:(BOOL)selected {
     
     [super setSelected:selected];
-    self.titleLabel.textColor = selected ? self.selectionTintColor : self.tintColor;
-    self.imageView.tintColor = selected ? self.selectionTintColor : self.tintColor;
+    self.titleLabel.textColor = selected ? self.selectedTintColor : self.tintColor;
+    self.imageView.tintColor = selected ? self.selectedTintColor : self.tintColor;
 }
 
 - (void)orientationChanged:(UIDeviceOrientation)orientation {

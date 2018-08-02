@@ -9,6 +9,9 @@
 #import "BEBounceResolver.h"
 #import "BETransformNormalizer.h"
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEBounceResolver ()
 
 @property (nonatomic, weak) UIView *rootView;
@@ -17,25 +20,34 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
 
 @implementation BEBounceResolver
 
+#pragma mark - Initialization
+
 - (nullable instancetype)initWithRootView:(UIView *)rootView
-         forObservableScrollView:(nullable UIScrollView *)scrollView {
+                     observableScrollView:(nullable UIScrollView *)scrollView {
     
-    self = [super init];
+    
     if (!scrollView) {
         self = nil;
-    } else if (self) {
-        _rootView = rootView;
-        scrollView.delegate = self;
-        _scrollView = scrollView;
-        _transformNormalizer = [[BETransformNormalizer alloc] initWithBounceResolver:self];
+    } else  {
+        self = [super init];
+        
+        if (self) {
+            _rootView = rootView;
+            scrollView.delegate = self;
+            _scrollView = scrollView;
+            _transformNormalizer = [[BETransformNormalizer alloc] initWithBounceResolver:self];
+        }
     }
     
     return self;
 }
 
+
+#pragma mark - Regular Methods
 
 - (CGFloat)scrollOffset {
     
@@ -55,8 +67,10 @@
 }
 
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation {
-    return  [self.transformNormalizer normalizedTransformForTranslation:translation];
+    return [self.transformNormalizer normalizedTransformForTranslation:translation];
 }
+
+#pragma mark - <UIScrollViewDelegate>
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     [self scrollViewDidScroll];
@@ -64,29 +78,31 @@
 
 - (void)scrollViewDidScroll {
     
-    BOOL isDecelerating = self.scrollView ? self.scrollView.isDecelerating : NO;
-    
-    if (self.scrollOffset > 0) {
-        self.scrollView.bounces = YES;
-        _isDismissEnabled = NO;
-        return;
-    }
-    
-    if (isDecelerating) {
-        self.rootView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -self.scrollOffset);
-        for (UIView *subview in self.scrollView.subviews) {
-            subview.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, self.scrollOffset);
+    BOOL needСontinue = YES;
+    if (self.scrollView) {
+        if (self.scrollOffset > 0) {
+            self.scrollView.bounces = YES;
+            _isDismissEnabled = NO;
+            needСontinue = NO;
+        } else if (needСontinue) {
+            BOOL isDecelerating = self.scrollView ? self.scrollView.isDecelerating : NO;
+            if (isDecelerating) {
+                self.rootView.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -self.scrollOffset);
+                for (UIView *subview in self.scrollView.subviews) {
+                    subview.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, self.scrollOffset);
+                }
+                needСontinue = NO;
+            } else if (needСontinue) {
+                if (self.scrollView.isTracking) {
+                    self.transformNormalizer.needNormalization = YES;
+                    for (UIView *subview in self.scrollView.subviews) {
+                        subview.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, self.scrollOffset);
+                    }
+                    self.scrollView.bounces = NO;
+                    _isDismissEnabled = YES;
+                }
+            }
         }
-        return;
-    }
-    
-    if (self.scrollView.isTracking) {
-        self.transformNormalizer.needNormalization = YES;
-        for (UIView *subview in self.scrollView.subviews) {
-            subview.transform = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, self.scrollOffset);
-        }
-        self.scrollView.bounces = NO;
-        _isDismissEnabled = YES;
     }
 }
 

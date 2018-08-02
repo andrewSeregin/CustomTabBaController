@@ -11,17 +11,23 @@
 
 @implementation BEBarBackground
 
+#pragma mark - Initialization
+
 - (instancetype)init {
+    
     self = [super init];
+    
     if (self) {
         self.clearsContextBeforeDrawing = YES;
-        [self setupSeporator];
-        [self setupEffectView];
+        [self setUpSeporator];
+        [self setUpEffectView];
     }
     return self;
 }
 
-- (void)setupSeporator {
+#pragma mark - Set Up
+
+- (void)setUpSeporator {
     self.separatorView = [UIView new];
     [self.separatorView setBackgroundColor:[UIColor colorWithWhite:.7f alpha:1.f]];
     
@@ -33,7 +39,7 @@
                                               [self.separatorView.heightAnchor constraintEqualToConstant:0.7f]]];
 }
 
-- (void)setupEffectView {
+- (void)setUpEffectView {
     
     self.effectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight]];
     [self addSubview:self.effectView];

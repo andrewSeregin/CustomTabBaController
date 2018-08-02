@@ -8,8 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BETabBarItem : UITabBarItem
+@interface BETabBarItem : NSObject
 
-//@property (nonatomic, strong) UIViewController *associatedController;
+@property (nonatomic, nullable, strong) UIImage *image;
+@property (nonatomic, nullable, strong) NSString *title;
+
+NS_ASSUME_NONNULL_BEGIN
+
+- (instancetype)initWithTitle:(NSString *)title image:(UIImage *)image;
+
+NS_ASSUME_NONNULL_END
 
 @end

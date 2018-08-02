@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEBarBackground : UIView
 
 @property (nonatomic, strong) UIView *separatorView;
 @property (nonatomic, strong) UIVisualEffectView *effectView;
 
 @end
+
+NS_ASSUME_NONNULL_END

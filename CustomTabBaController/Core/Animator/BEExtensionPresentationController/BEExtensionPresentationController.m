@@ -29,6 +29,7 @@
                        presentingViewController:(UIViewController *)presentingViewController {
     
     self = [super initWithPresentedViewController:presentedViewController presentingViewController:presentingViewController];
+    
     if (self) {
         _presented = YES;
     }
@@ -79,23 +80,23 @@
 
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     
-    BEExtensibleViewController *extensionViewController = (BEExtensibleViewController *) self.presentedViewController;
+    BEExtensibleViewController *extensibleViewController = (BEExtensibleViewController *) self.presentedViewController;
     BEExtendedTabBarController *extendedTabBarController = (BEExtendedTabBarController *) self.presentingViewController;
     
     if (self.isPresented) {
         return [self animatePresentTransition:transitionContext
                    onExtendedTabBarController:extendedTabBarController
-                   forExtensionViewController:extensionViewController];
+                   forExtensibleViewController:extensibleViewController];
     }
     
     [self animateDismissTransition:transitionContext
         onExtendedTabBarController:extendedTabBarController
-        forExtensionViewController:extensionViewController];
+        forExtensibleViewController:extensibleViewController];
 }
 
 - (void)animatePresentTransition:(id <UIViewControllerContextTransitioning>)transitionContext
     onExtendedTabBarController:(BEExtendedTabBarController *)extendedTabBarController
-      forExtensionViewController:(BEExtensibleViewController *)extensionViewController {
+      forExtensibleViewController:(BEExtensibleViewController *)extensionViewController {
     
     self.presented = NO;
     [self.containerView addSubview:self.presentedView];
@@ -124,26 +125,26 @@
     [self.containerView layoutIfNeeded];
     self.presentedView.clipsToBounds = YES;
     
-    CGFloat scale = 1 - [extensionViewController statusBarOffsetToContentHeightRatio:extendedTabBarController.view.bounds.size.height];
+    CGFloat scale = 1.f - [extensionViewController statusBarOffsetToContentHeightRatio:extendedTabBarController.view.bounds.size.height];
     
     [UIView animateWithDuration:0.6
                           delay:0
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.5
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.5f
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          extendedTabBarController.selectedViewController.view.clipsToBounds = YES;
                          extendedTabBarController.selectedViewController.view.transform = CGAffineTransformScale(extendedTabBarController.selectedViewController.view.transform, scale, scale);
-                         extendedTabBarController.selectedViewController.view.layer.cornerRadius = 10;
+                         extendedTabBarController.selectedViewController.view.layer.cornerRadius = 10.f;
                          
                          self.snapshotConstraint.constant = self.tabBarSnapshot.bounds.size.height;
                          [extensionViewController animateExpand];
                          
-                         self.presentedControllerHeightConstraint.constant = self.containerView.bounds.size.height - 50;
-                         self.presentedControllerTopConstraint.constant = 50;
+                         self.presentedControllerHeightConstraint.constant = self.containerView.bounds.size.height - 50.f;
+                         self.presentedControllerTopConstraint.constant = 50.f;
                          
                          [self.containerView layoutIfNeeded];
-                         self.presentedView.layer.cornerRadius = 10;
+                         self.presentedView.layer.cornerRadius = 10.f;
                          
                      } completion:^(BOOL finished) {
                          [transitionContext completeTransition:!transitionContext.transitionWasCancelled];
@@ -152,27 +153,27 @@
 
 - (void)animateDismissTransition:(id <UIViewControllerContextTransitioning>)transitionContext
    onExtendedTabBarController:(BEExtendedTabBarController *)extendedTabBarController
-     forExtensionViewController:(BEExtensibleViewController *)extensionViewController {
+     forExtensibleViewController:(BEExtensibleViewController *)extensionViewController {
     
     self.presented = YES;
     [UIView animateWithDuration:0.6
                           delay:0
-         usingSpringWithDamping:0.8
-          initialSpringVelocity:0.5
+         usingSpringWithDamping:0.8f
+          initialSpringVelocity:0.5f
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          
                          [extendedTabBarController.extendableView setHidden:YES];
-                         extendedTabBarController.selectedViewController.view.layer.cornerRadius = 0;
+                         extendedTabBarController.selectedViewController.view.layer.cornerRadius = 0.f;
                          extendedTabBarController.selectedViewController.view.transform = CGAffineTransformIdentity;
                          extendedTabBarController.selectedViewController.view.frame = self.frameOfPresentedViewInContainerView;
                          
-                         self.snapshotConstraint.constant = 0;
+                         self.snapshotConstraint.constant = 0.f;
                          self.presentedControllerTopConstraint.constant = extendedTabBarController.extendableView.frame.origin.y - extensionViewController.view.transform.ty;
                          self.presentedControllerHeightConstraint.constant = UIScreen.mainScreen.bounds.size.height - extendedTabBarController.extendableView.frame.origin.y;
                          [extensionViewController animateShrink];
                          [self.containerView layoutIfNeeded];
-                         self.presentedView.layer.cornerRadius = 0;
+                         self.presentedView.layer.cornerRadius = 0.f;
                          
                      } completion:^(BOOL finished) {
                          

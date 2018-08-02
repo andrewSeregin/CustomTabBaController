@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) BEExtendedTabBarController *rootViewController;
 
+
 @end
 
 @implementation AppDelegate
@@ -37,28 +38,29 @@
     
     
     BETabBarItem *itemOne = [[BETabBarItem alloc] initWithTitle:@"window"
-                                                          image: [UIImage imageNamed:@"window"]
-                                                            tag:1055];
+                                                          image:[UIImage imageNamed:@"window"]];
     BETabBarItem *itemTwo = [[BETabBarItem alloc] initWithTitle:@"paper_piece"
-                                                          image: [UIImage imageNamed:@"paper_piece"]
-                                                            tag:1056];
+                                                          image:[UIImage imageNamed:@"paper_piece"]];
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     BEExtendedTabBarController  *rootViewController = [PlayerTabBarViewController new];
-    self.rootViewController = rootViewController;
-    self.window.rootViewController = rootViewController;
-    [self.window makeKeyAndVisible];
-    
     [rootViewController setViewControllers:@[redViewController,
                                              brownViewController]
                         forAssosiatedItems:@[itemOne,
                                              itemTwo]];
+    
+    self.rootViewController = rootViewController;
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+    
+
     return YES;
 }
 
 - (void)handleTap {
-    [self.rootViewController setExtendableViewHidden:YES animated:YES];
+    [self.rootViewController setExtendableViewHidden:!self.rootViewController.extendableView.isHidden
+                                            animated:YES];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

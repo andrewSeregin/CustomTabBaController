@@ -7,14 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <Foundation/Foundation.h>
 
 
 @interface BEBounceResolver : NSObject <UIScrollViewDelegate>
 
-@property (nonatomic, assign, readonly, getter=isDismissedEnabled) BOOL isDismissEnabled;
+@property (nonatomic, assign, readonly) BOOL isDismissEnabled;
 
-- (nullable instancetype)initWithRootView:(UIView *)rootView forObservableScrollView:(nullable UIScrollView *)scrollView;
+- (nullable instancetype)initWithRootView:(UIView *)rootView observableScrollView:(nullable UIScrollView *)scrollView;
 
 - (CGAffineTransform)currentTransform;
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation;

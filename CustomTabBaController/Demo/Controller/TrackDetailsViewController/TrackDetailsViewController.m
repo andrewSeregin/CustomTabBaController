@@ -29,7 +29,9 @@
 @implementation TrackDetailsViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    
     [self prepareContent];
     self.view.backgroundColor = UIColor.whiteColor;
     [self.view addSubview:self.scroll];

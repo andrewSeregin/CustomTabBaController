@@ -17,15 +17,21 @@
 
 @implementation BETransformNormalizer
 
+
+#pragma mark - Initialization
+
 - (instancetype)initWithBounceResolver:(BEBounceResolver *)bounceResolver {
     
     self = [super init];
+    
     if (self) {
         _bounceResolver = bounceResolver;
     }
     
     return self;
 }
+
+#pragma mark - Regular Methods
 
 - (CGAffineTransform)normalizedTransformForTranslation:(CGFloat)translation {
     

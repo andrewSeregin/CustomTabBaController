@@ -19,6 +19,7 @@
 - (instancetype)init
 {
     self = [super initWithFrame:CGRectMake(0, 0, 90, 90)];
+    
     if (self) {
         
         _imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"cover"]];

@@ -9,6 +9,8 @@
 #import "BEExtensionPercentDrivenInteractiveTransition.h"
 
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface BEExtensionPercentDrivenInteractiveTransition ()
 
 @property (nonatomic, strong) UIView *sourceView;
@@ -17,25 +19,23 @@
 
 @end
 
+NS_ASSUME_NONNULL_END
+
+
 @implementation BEExtensionPercentDrivenInteractiveTransition
 
 - (instancetype)initWithSourceView:(UIView *)sourceView {
     
     self = [super init];
+    
     if (self) {
         _sourceView = sourceView;
-        [self prepareGestureRecognizer];
+        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                  action:@selector(handlePanGesture:)];
+        [self.sourceView addGestureRecognizer:self.panGesture];
     }
     
     return self;
-}
-
-- (void)prepareGestureRecognizer {
-    
-    UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(handlePanGesture:)];
-    [self.sourceView addGestureRecognizer:panRecognizer];
-    self.panGesture = panRecognizer;
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panRecognizer {

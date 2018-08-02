@@ -10,7 +10,6 @@
 
 #import "BEExtendedTabBarController.h"
 
-
 @interface BEExtensionPresentationController : UIPresentationController <UIViewControllerAnimatedTransitioning>
 
 @property (nonatomic, strong) UIView *tabBarSnapshot;
