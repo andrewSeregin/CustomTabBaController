@@ -12,13 +12,12 @@
 @interface BEExtensionPercentDrivenInteractiveTransition ()
 
 @property (nonatomic, strong) UIView *sourceView;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
 @property (nonatomic, assign) BOOL needsToComplete;
 
 @end
 
 @implementation BEExtensionPercentDrivenInteractiveTransition
-
-@synthesize panRecognizer = _panRecognizer;
 
 - (instancetype)initWithSourceView:(UIView *)sourceView {
     
@@ -34,12 +33,12 @@
 - (void)prepareGestureRecognizer {
     
     UIPanGestureRecognizer *panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(handlePanRecognizer:)];
+                                                                                 action:@selector(handlePanGesture:)];
     [self.sourceView addGestureRecognizer:panRecognizer];
-    _panRecognizer = panRecognizer;
+    self.panGesture = panRecognizer;
 }
 
-- (void)handlePanRecognizer:(UIPanGestureRecognizer *)panRecognizer {
+- (void)handlePanGesture:(UIPanGestureRecognizer *)panRecognizer {
     
     CGPoint transition = [panRecognizer translationInView:self.sourceView];
     CGFloat delta = self.sourceView.frame.origin.y - UIApplication.sharedApplication.statusBarFrame.size.height;

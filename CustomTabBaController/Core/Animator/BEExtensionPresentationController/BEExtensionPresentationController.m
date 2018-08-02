@@ -8,19 +8,18 @@
 
 #import "BEExtensibleViewController.h"
 
-
 #import "BEExtensionPresentationController.h"
 
 
 @interface BEExtensionPresentationController ()
 
-@property (nonatomic, assign) BOOL isPresenting;
-
-@property (nonatomic, strong) NSLayoutConstraint *snapshotConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *presentedControllerHeightConstraint;
-@property (nonatomic, strong) NSLayoutConstraint *presentedControllerTopConstraint;
+@property (nonatomic, assign, getter=isPresented) BOOL presented;
 
 @property (nonatomic, strong) UIView *dimmingView;
+
+@property (nonatomic, strong) NSLayoutConstraint *presentedControllerHeightConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *presentedControllerTopConstraint;
+@property (nonatomic, strong) NSLayoutConstraint *snapshotConstraint;
 
 @end
 
@@ -31,7 +30,7 @@
     
     self = [super initWithPresentedViewController:presentedViewController presentingViewController:presentingViewController];
     if (self) {
-        _isPresenting = YES;
+        _presented = YES;
     }
     
     return self;
@@ -83,7 +82,7 @@
     BEExtensibleViewController *extensionViewController = (BEExtensibleViewController *) self.presentedViewController;
     BEExtendedTabBarController *extendedTabBarController = (BEExtendedTabBarController *) self.presentingViewController;
     
-    if (self.isPresenting) {
+    if (self.isPresented) {
         return [self animatePresentTransition:transitionContext
                    onExtendedTabBarController:extendedTabBarController
                    forExtensionViewController:extensionViewController];
@@ -98,7 +97,7 @@
     onExtendedTabBarController:(BEExtendedTabBarController *)extendedTabBarController
       forExtensionViewController:(BEExtensibleViewController *)extensionViewController {
     
-    self.isPresenting = NO;
+    self.presented = NO;
     [self.containerView addSubview:self.presentedView];
     self.presentedView.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -155,7 +154,7 @@
    onExtendedTabBarController:(BEExtendedTabBarController *)extendedTabBarController
      forExtensionViewController:(BEExtensibleViewController *)extensionViewController {
     
-    self.isPresenting = YES;
+    self.presented = YES;
     [UIView animateWithDuration:0.6
                           delay:0
          usingSpringWithDamping:0.8

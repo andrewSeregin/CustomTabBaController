@@ -13,7 +13,6 @@
 
 @interface BEExtensionPercentDrivenInteractiveTransition : UIPercentDrivenInteractiveTransition
 
-@property (nonatomic, strong, readonly) UIPanGestureRecognizer *panRecognizer;
 @property (nonatomic, weak) id<BEExtensionPercentDrivenInteractiveTransitionDelegate> delegate;
 
 - (instancetype)initWithSourceView:(UIView *)sourceView;

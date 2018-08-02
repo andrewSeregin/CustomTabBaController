@@ -37,24 +37,24 @@
 - (void)prepareGestureRecognizers {
     
     UIPanGestureRecognizer * panRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self
-                                                                                     action:@selector(handlePanRecognizer:)];
+                                                                                     action:@selector(handlePanGesture:)];
     panRecognizer.delegate = self;
     [self.view addGestureRecognizer:panRecognizer];
     self.panRecognizer = panRecognizer;
     
 }
 
-- (void)transformAccordingTranslation:(CGFloat)translation andCurrentProgress:(CGFloat)progress {
+- (void)transformAccordingTranslation:(CGFloat)translation withCurrentProgres:(CGFloat)progress {
     
     CGFloat threshold = [self.delegate dismissThresholdFor:self];
-    if (translation < 0) { return; }
-    [self.delegate extensibleViewController:self updateProgress:progress];
-    
-    CGFloat elastic = [self elasticTranslationFromTranslation:translation];
-    self.view.transform = self.bounceResolver ? [self.bounceResolver normalizedTransformForTranslation:elastic] : CGAffineTransformTranslate(CGAffineTransformIdentity, 0, elastic);
-    
-    if (translation >= threshold) {
-        [self dismissViewControllerAnimated:true completion:nil];
+    if (translation >= 0) {
+        [self.delegate extensibleViewController:self updateProgress:progress];
+        CGFloat elastic = [self elasticTranslationFromTranslation:translation];
+        self.view.transform = self.bounceResolver ? [self.bounceResolver normalizedTransformForTranslation:elastic] : CGAffineTransformTranslate(CGAffineTransformIdentity, 0, elastic);
+        
+        if (translation >= threshold) {
+            [self dismissViewControllerAnimated:true completion:nil];
+        }
     }
 }
 
@@ -82,7 +82,11 @@
 
 - (CGFloat)percentage {
     
-    BEExtendedTabBarController *extendedTabBarController = (BEExtendedTabBarController *)self.presentingViewController;
+    BEExtendedTabBarController *extendedTabBarController = nil;
+    if ([self.presentingViewController isKindOfClass:[BEExtendedTabBarController class]]) {
+        extendedTabBarController = (BEExtendedTabBarController *)self.presentingViewController;
+    }
+    
     return extendedTabBarController.extendableView.frame.origin.y;
 }
 
@@ -91,7 +95,7 @@
     return nil;
 }
 
-- (void)handlePanRecognizer:(UIPanGestureRecognizer *)gestureRecognizer {
+- (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
 
     if (![gestureRecognizer isEqual:self.panRecognizer] && ![self allowsDismissSwipe]) { return; }
     
@@ -112,7 +116,7 @@
             break;
         case UIGestureRecognizerStateChanged:
             if ([self allowsDismissSwipe]) {
-                [self transformAccordingTranslation:translation.y andCurrentProgress:progress];
+                [self transformAccordingTranslation:translation.y withCurrentProgres:progress];
             }
             break;
         case UIGestureRecognizerStateEnded:

@@ -299,20 +299,20 @@
 		B192EA3F2108642000355080 /* BEExtendedTabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				B192EA4021086D3900355080 /* BELayoutContainerView */,
+				B192EA4021086D3900355080 /* BEExtendedTabBarControllerContainerView */,
 				B192EA2221074A0F00355080 /* BEExtendedTabBarController.h */,
 				B192EA2321074A0F00355080 /* BEExtendedTabBarController.m */,
 			);
 			path = BEExtendedTabBarController;
 			sourceTree = "<group>";
 		};
-		B192EA4021086D3900355080 /* BELayoutContainerView */ = {
+		B192EA4021086D3900355080 /* BEExtendedTabBarControllerContainerView */ = {
 			isa = PBXGroup;
 			children = (
 				B192EA4121086DB400355080 /* BEExtendedTabBarControllerContainerView.h */,
 				B192EA4221086DB400355080 /* BEExtendedTabBarControllerContainerView.m */,
 			);
-			path = BELayoutContainerView;
+			path = BEExtendedTabBarControllerContainerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

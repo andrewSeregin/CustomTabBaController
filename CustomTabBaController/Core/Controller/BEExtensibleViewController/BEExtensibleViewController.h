@@ -20,6 +20,7 @@
 
 - (CGFloat)statusBarOffsetToContentHeightRatio:(CGFloat)ratio;
 - (nullable UIScrollView *)observableScrollView;
+
 - (void)animateShrink;
 - (void)animateExpand;
 
