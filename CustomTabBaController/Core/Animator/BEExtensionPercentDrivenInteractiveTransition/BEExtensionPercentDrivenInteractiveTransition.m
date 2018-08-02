@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_END
 
 @implementation BEExtensionPercentDrivenInteractiveTransition
 
+#pragma mark - Initialization
+
 - (instancetype)initWithSourceView:(UIView *)sourceView {
     
     self = [super init];
@@ -37,6 +39,8 @@ NS_ASSUME_NONNULL_END
     
     return self;
 }
+
+#pragma mark - Pan Gesture Recognizer
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)panRecognizer {
     
